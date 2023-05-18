@@ -4,8 +4,7 @@
 
 body{
     margin: 0 0 $mobbar-ht;
-    font-family: $font-s;
-    line-height: 1.5em;
+    @include font(400, $textSize, $textLh, $font-s);
 }
 
 figure{

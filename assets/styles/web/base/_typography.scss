@@ -1,0 +1,42 @@
+/* #region Typo Titles */
+h2{
+    @include font(400, $title2Size, $titleLh, $font-s);
+}
+
+h3{
+    @include font(400, $title3Size, $titleLh, $font-s);
+}
+/* #endregion Typo Titles */
+
+/* #region Stylish Font */
+@include typography($policyPathStylish, $font-p, 400, 'Stylish-Regular', true);
+/* #endregion Stylish Font */
+
+/* #region Raleway Font */
+@include typography($policyPathRaleway, $font-s, 100, 'Raleway-Thin');
+@include typography($policyPathRaleway, $font-s, 100, 'Raleway-ThinItalic', true);
+
+@include typography($policyPathRaleway, $font-s, 200, 'Raleway-ExtraLight');
+@include typography($policyPathRaleway, $font-s, 200, 'Raleway-ExtraLightItalic', true);
+
+@include typography($policyPathRaleway, $font-s, 300, 'Raleway-Light');
+@include typography($policyPathRaleway, $font-s, 300, 'Raleway-LightItalic', true);
+
+@include typography($policyPathRaleway, $font-s, 400, 'Raleway-Regular');
+@include typography($policyPathRaleway, $font-s, 400, 'Raleway-Italic', true);
+
+@include typography($policyPathRaleway, $font-s, 500, 'Raleway-Medium');
+@include typography($policyPathRaleway, $font-s, 500, 'Raleway-MediumItalic', true);
+
+@include typography($policyPathRaleway, $font-s, 600, 'Raleway-SemiBold');
+@include typography($policyPathRaleway, $font-s, 600, 'Raleway-SemiBoldItalic', true);
+
+@include typography($policyPathRaleway, $font-s, 700, 'Raleway-Bold');
+@include typography($policyPathRaleway, $font-s, 700, 'Raleway-BoldItalic', true);
+
+@include typography($policyPathRaleway, $font-s, 800, 'Raleway-ExtraBold');
+@include typography($policyPathRaleway, $font-s, 800, 'Raleway-ExtraBoldItalic', true);
+
+@include typography($policyPathRaleway, $font-s, 900, 'Raleway-Black');
+@include typography($policyPathRaleway, $font-s, 900, 'Raleway-BlackItalic', true);
+/* #endregion Raleway Font */

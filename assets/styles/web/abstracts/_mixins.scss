@@ -12,19 +12,19 @@
 }
 
 /* #region Typographie */
-@mixin typography($fontWeight, $fontFile, $fontStyle: false){
+@mixin typography($path, $fontFamily, $fontWeight, $fontFile, $fontStyle: false){
     @font-face {
         font-family: $fontFamily;
         font-weight: $fontWeight;
         @if $fontStyle{
             font-style: italic;
         }
-        src: url('../../../fonts/raleway/' + $fontFile + '.ttf');
+        src: url($path + $fontFile + '.ttf');
     }
 }
 
-@mixin font($weight, $size, $lineHeight){
-    font: $weight calc((#{$size} / 16) * 1em)/calc((#{$lineHeight} / 16) * 1em) $fontFamily;
+@mixin font($weight, $size, $lineHeight, $fontFamily){
+    font: $weight calc((#{$size} / 16) * 1em)/#{$lineHeight} $fontFamily;
     margin-top: 0;
 }
 /* #endregion Typographie */
