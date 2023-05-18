@@ -1,6 +1,6 @@
 header{
     width: 100%;
-    height: $header-ht;
+    height: $header-ht-m;
     position: fixed;
     top: 0;
     left: 0;
@@ -9,10 +9,12 @@ header{
         content: '';
         background-color: $color;
         position: absolute;
+        z-index: -1;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        transition-duration: 1s;
     }
     img{
         position: absolute;
@@ -25,7 +27,48 @@ header{
     button{
         display: none;
         &.nav-btn{
+            width: 40px;
             @include nav-btn();
+        }
+    }
+    @media screen and (min-width: $xs) {
+        button{
+            display: block;
+        }
+    }
+    @media screen and (min-width: $lg) {
+        height: $header-ht;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &::before{
+            height: 0%;
+        }
+    }
+}
+
+.nav-open, .onScroll{
+    header{
+        @media screen and (min-width: $lg) {
+            &::before{
+                height: 100%;
+            }
+        }
+    }
+}
+
+.nav-open{
+    header{
+        button{
+            &.nav-btn{
+                .bar{
+                    width: 0;
+                }
+                .close-bar{
+                    transform: translate(-50%, -50%) scale(1);
+                }
+            }
         }
     }
 }

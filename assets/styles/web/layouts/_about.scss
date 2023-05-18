@@ -1,11 +1,37 @@
 .about{
     .text{
-        padding: $marge-m;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         h2{
             margin-top: 0;
         }
     }
-    img{
-        display: block;
+    .image{
+        padding: 0;
+        img{
+            display: block;
+        }
+    }
+    @media screen and (min-width: $sm) {
+        .image{
+            img{
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+    @media screen and (min-width: $lg) {
+        position: relative;
+        &::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: -1;
+            width: 25%;
+            height: 100%;
+            background-color: $color;
+        }
     }
 }

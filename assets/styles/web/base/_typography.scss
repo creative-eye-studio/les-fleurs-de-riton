@@ -6,6 +6,13 @@ h2{
 h3{
     @include font(400, $title3Size, $titleLh, $font-s);
 }
+
+p{
+    margin-top: 0;
+    &:last-child{
+        margin-bottom: 0
+    }
+}
 /* #endregion Typo Titles */
 
 /* #region Stylish Font */

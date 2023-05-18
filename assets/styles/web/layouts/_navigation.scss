@@ -2,7 +2,7 @@
     padding: $marge-m;
     background-color: $color-s;
     position: fixed;
-    top: $header-ht;
+    top: $header-ht-m;
     right: 0;
     bottom: $mobbar-ht;
     left: 0;
@@ -29,6 +29,20 @@
                 height: 100%;
                 background-color: rgba($color: #000000, $alpha: 0.7);
                 font: 500 1em/1.5em $font-s;
+            }
+        }
+    }
+    @media screen and (min-width: $lg) {
+        top: $header-ht;
+        bottom: 0;
+        ul{
+            flex-direction: row;
+            li{
+                font-size: 1.5em;
+                transition-duration: 1s;
+                &:hover{
+                    letter-spacing: 0.1em;
+                }
             }
         }
     }

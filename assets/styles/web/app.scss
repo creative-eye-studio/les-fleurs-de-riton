@@ -10,13 +10,15 @@
 @import './components/mobile-bar';
 @import './components/parallax';
 @import './components/buttons';
+@import './components/grid';
+@import './components/utils';
 
 // LAYOUTS
+@import './layouts/forms';
 @import './layouts/header';
 @import './layouts/navigation';
 @import './layouts/home';
 @import './layouts/about';
 @import './layouts/services';
 @import './layouts/contact';
-@import './layouts/forms';
 @import './layouts/footer';

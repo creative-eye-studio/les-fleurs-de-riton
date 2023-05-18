@@ -1,6 +1,6 @@
 .services{
     background-color: $color-s-l;
-    padding: $marge-m;
+    // padding: $marge-m;
     .btn-list{
         margin-bottom: $marge-m;
         ul{
@@ -24,7 +24,6 @@
         .service-block{
             opacity: 0;
             visibility: hidden;
-            display: none;
             transform: translateY(1rem);
             position: absolute;
             top: 0;
@@ -34,7 +33,6 @@
             &.active{
                 opacity: 1;
                 visibility: visible;
-                display: block;
                 transform: translateY(0);
                 position: relative;
             }

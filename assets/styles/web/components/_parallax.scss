@@ -3,8 +3,11 @@
     position: relative;
     padding-top: 35%;
     overflow: hidden;
-	margin-bottom: 15vh;
+	// margin-bottom: 15vh;
 	background-color: lightcoral;
+	@media screen and (min-width: $lg) {
+		display: block;
+	}
 }
 
 .parallax-element{

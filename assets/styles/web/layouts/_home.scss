@@ -1,19 +1,21 @@
 .home-screen{
-    background-color: rgba($color: $color-s-l, $alpha: 1.0);
-    font-family: $font-s;
-    padding-top: $header-ht;
+    // font-family: $font-s;
+    padding-top: $header-ht-m;
+    .content-home{
+        background-color: rgba($color: $color-s-l, $alpha: 1.0);
+    }
     .text{
         padding: $marge-m;
         h1{
             font: 400 .9em/1.5em $font-s;
-            margin-bottom: 0;
+            margin: 0;
         }
         h2{
-            margin: 0;
+            margin: .25em 0;
         }
         p{
             font: 400 1.25em/1.5em $font-s;
-            margin-bottom: 0;
+            margin: 0;
         }
     }
     .image{
@@ -23,6 +25,40 @@
             display: block;
             padding: 0 0 $marge-m;
             margin: auto;
+        }
+    }
+    @media screen and (min-width: $sm) {
+        .text, .image{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+    @media screen and (min-width: $lg) {
+        padding-top: 0;
+        position: relative;
+        height: 100vh;
+        .content-home{
+            background-color: rgba($color: #000, $alpha: 0.75);
+            color: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 10;
+        }
+        .parallax-section{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+        }
+        .image{
+            img{
+                width: 60%;
+            }
         }
     }
 }

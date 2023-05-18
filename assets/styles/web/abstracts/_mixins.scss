@@ -1,13 +1,49 @@
 @mixin nav-btn(){
-    background-color: rgba($color: #000000, $alpha: 0);
+    background-color: rgba($color: #fff, $alpha: 0);
     border: none;
+    position: relative;
     cursor: pointer;
     i{
-        width: 40px;
-        height: 1.75px;
-        background-color: black;
-        margin: 10px 0;
-        display: block;
+        &:not(.close-bar){
+            width: 40px;
+            height: 1.75px;
+            background-color: #fff;
+            margin: 10px 0;
+            display: block;
+        }
+        &.close-bar{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            &::before, &::after{
+                width: 40px;
+                height: 1.75px;
+                background-color: #fff;
+                content: '';
+                display: block;
+            }
+            &::before{
+                transform: rotate(45deg);
+            }
+            &::after{
+                transform: rotate(-45deg);
+            }
+            
+        }
+    }
+    @media screen and (min-width: $lg) {
+        i{
+            transition-duration: 1s;
+        }
+        &:hover{
+            .bar-2{
+                width: calc(40px * 0.66);
+            }
+            .bar-3{
+                width: calc(40px * 0.33);
+            }
+        }
     }
 }
 
@@ -150,25 +186,25 @@
 /* #region Marges */
 @mixin margeInit($type, $side){
     @if $side == 'null' {
-        #{$type}: $marge-d-y $marge-d-x;
+        #{$type}: $marge-d-y $marge-d-x !important;
     }
     @if $side == 'auto' {
-        #{$type}: auto;
+        #{$type}: auto !important;
     }
     @if $side == 'none' {
-        #{$type}: 0;
+        #{$type}: 0 !important;
     }
     @if $side == 'top' {
-        #{$type}-top: $marge-d-y;
+        #{$type}-top: $marge-d-y !important;
     }
     @if $side == 'bottom' {
-        #{$type}-bottom: $marge-d-y;
+        #{$type}-bottom: $marge-d-y !important;
     }
     @if $side == 'left' {
-        #{$type}-left: $marge-d-x;
+        #{$type}-left: $marge-d-x !important;
     }
     @if $side == 'right' {
-        #{$type}-right: $marge-d-x;
+        #{$type}-right: $marge-d-x !important;
     }
 }
 
@@ -176,19 +212,19 @@
     @include margeInit($type, $side);
     @media screen and (max-width: $size) {
         @if $side == 'null' {
-            #{$type}: $marge-m;
+            #{$type}: $marge-m !important;
         }
         @if $side == 'top' {
-            #{$type}-top: $marge-m;
+            #{$type}-top: $marge-m !important;
         }
         @if $side == 'bottom' {
-            #{$type}-bottom: $marge-m;
+            #{$type}-bottom: $marge-m !important;
         }
         @if $side == 'left' {
-            #{$type}-left: $marge-m;
+            #{$type}-left: $marge-m !important;
         }
         @if $side == 'right' {
-            #{$type}-right: $marge-m;
+            #{$type}-right: $marge-m !important;
         }
     }
     

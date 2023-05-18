@@ -28,4 +28,7 @@
             font: 400 1em/1.5em $font-s;
         }
     }
+    @media screen and (min-width: $xs) {
+        display: none;
+    }
 }
