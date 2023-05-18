@@ -1,0 +1,31 @@
+.mobile-bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: $mobbar-ht;
+    background-color: $color;
+    display: flex;
+    button{
+        &.nav-btn{
+            width: $mobbar-ht;
+            height: 100%;
+            padding: 0 12px;
+            @include nav-btn();
+            i{
+                width: 100%;
+                margin: 10px auto;
+                background-color: white;
+            }
+        }
+        &.contact-btn{
+            background-color: rgba($color: #000000, $alpha: 0);
+            color: white;
+            width: 100%;
+            border: none;
+            border-left: 1px solid white;
+            font: 400 1em/1.5em $font-s;
+        }
+    }
+}

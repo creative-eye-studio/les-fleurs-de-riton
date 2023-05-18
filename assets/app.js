@@ -18,11 +18,13 @@ import AOS from 'aos';
 
 // Variables
 // -----------------------------------------------
-var pageDatas = document.querySelector('body')
+var htmlContent = document.querySelector('html');
+var pageDatas = document.querySelector('body');
 var values = {
     damping: pageDatas.dataset.damping,
     scrollImgSpeed: pageDatas.dataset.scrollimg
 }
+
 
 // Instantieur
 // -----------------------------------------------
@@ -33,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function(){
     parallax();
 })
 
+
 // Smooth Scrollbar
 // -----------------------------------------------
 function scrollWeb() {
@@ -41,6 +44,7 @@ function scrollWeb() {
     return scrollWeb;
 }
 
+
 // Parallax
 // -----------------------------------------------
 function parallax(){
@@ -48,3 +52,24 @@ function parallax(){
     parallax.initParallax();
     return parallax;
 }
+
+
+// Menu Nav
+// -----------------------------------------------
+var navBtn = document.querySelectorAll('.toggle-nav');
+navBtn.forEach(btn => {
+    btn.addEventListener('click', function(){
+        htmlContent.classList.toggle('nav-open');
+    })
+})
+
+
+// Service Tabs
+// -----------------------------------------------
+var serviceBtn = document.querySelectorAll('.service-btn');
+serviceBtn.forEach(btn => {
+    btn.addEventListener('click', function(){
+        console.log('cliqué');
+        console.log(btn.getAttribute('data-link'));
+    })
+})

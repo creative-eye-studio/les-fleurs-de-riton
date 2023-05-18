@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\GlobalSettings;
 use App\Entity\PagesList;
 use App\Entity\PostsList;
+use App\Form\ContactFormType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,6 +38,13 @@ class WebPagesIndexController extends AbstractController
             return $this->redirectToRoute('web_index');
         }
 
+        $contactForm = $this->createForm(ContactFormType::class);
+        $contactForm->handleRequest($request);
+        
+        if ($contactForm->isSubmitted() && $contactForm->isValid()) { 
+            
+        }
+
         return $this->render('web_pages_views/index.html.twig', [
             'page_id' => $page->getPageId(),
             'page_slug' => $page->getPageUrl(),
@@ -45,6 +53,7 @@ class WebPagesIndexController extends AbstractController
             'meta_title' => $meta_title,
             'meta_desc' => $meta_desc,
             'settings' => $settings,
+            'contact_form' => $contactForm
         ]);
     }
 

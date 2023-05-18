@@ -8,9 +8,9 @@
 {% block scrollimg %}{{ settings.scrollimg }}{% endblock %}
 
 {% block body %}
+    {% include "webpages/blocks/#{page_lang}/header.html.twig" %}
     <div id="content">
         <div id="website">
-            {% include "webpages/blocks/#{page_lang}/header.html.twig" %}
             <main id="main">
                 {% include "webpages/pages/#{page_lang}/#{page_id}.html.twig" %}
             </main>

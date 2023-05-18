@@ -1,0 +1,29 @@
+.home-screen{
+    background-color: rgba($color: $color-s-l, $alpha: 1.0);
+    font-family: $font-s;
+    padding-top: $header-ht;
+    .text{
+        padding: $marge-m;
+        h1{
+            font: 400 .9em/1.5em $font-s;
+            margin-bottom: 0;
+        }
+        h2{
+            font: 400 2em/1.2em $font-s;
+            margin: 0;
+        }
+        p{
+            font: 400 1.25em/1.5em $font-s;
+            margin-bottom: 0;
+        }
+    }
+    .image{
+        img{
+            width: 80%;
+            height: auto;
+            display: block;
+            padding: 0 0 $marge-m;
+            margin: auto;
+        }
+    }
+}

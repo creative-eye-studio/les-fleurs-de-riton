@@ -1,0 +1,46 @@
+.services{
+    background-color: $color-s-l;
+    padding: $marge-m;
+    .btn-list{
+        margin-bottom: $marge-m;
+        ul{
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+        li{
+            margin: 0 0 1rem;
+            font-style: italic;
+            font-weight: 500;
+            a{
+                color: black;
+                text-decoration: none;
+            }
+        }
+    }
+    .services-list{
+        position: relative;
+        .service-block{
+            opacity: 0;
+            visibility: hidden;
+            display: none;
+            transform: translateY(1rem);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: 1s;
+            h2{
+                font: 400 2em/1.2em $font-s;
+            }
+            &.active{
+                opacity: 1;
+                visibility: visible;
+                display: block;
+                transform: translateY(0);
+                position: relative;
+            }
+        }
+    }
+}

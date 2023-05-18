@@ -3,7 +3,18 @@
 }
 
 body{
+    margin: 0 0 $mobbar-ht;
+    font-family: $font-s;
+    line-height: 1.5em;
+}
+
+figure{
     margin: 0;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
 }
 
 .scroll-content{

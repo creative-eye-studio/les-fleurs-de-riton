@@ -1,0 +1,14 @@
+.form-input{
+    text-align: left;
+    margin-bottom: 1rem;
+    label{
+        display: block;
+    }
+    input, textarea{
+        width: 100%;
+        padding: .5rem;
+    }
+    textarea{
+        height: 200px;
+    }
+}

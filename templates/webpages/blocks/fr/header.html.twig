@@ -1,10 +1,22 @@
 <header id="header">
-<h1>En-tête du site</h1>
+  <button class="nav-btn toggle-nav"><i class="bar bar-1"></i> <i class="bar bar-2"></i> <i class="bar bar-3"></i>
+  </button>
+  <figure class="logotype"><img alt="Les Fleurs de Riton" class="logo-text" src="../uploads/images/pages/logo-text.png" />
+  </figure>
+  <button class="contact-btn">Nous contacter
+  </button>
 </header>
-
-<nav>
-<ul id="nav">
-	<li><a href="/fr">Accueil</a></li>
-	<li>{% if page_slug is defined %} <a data-no-swup="" href="/en/{{ page_slug }}">EN</a> {% elseif post_slug is defined %} <a data-no-swup="" href="/en/blog/{{ post_slug }}">EN</a> {% endif %}</li>
-</ul>
+<nav class="navsite">
+  <ul id="nav">
+    <li><a href="#">Bienvenue</a></li>
+    <li><a href="#">Marianne et Riton</a></li>
+    <li><a href="#">Prestations et réalisations</a></li>
+    <li><a href="#">Accès et Contact</a></li>
+  </ul>
 </nav>
+<div class="mobile-bar">
+  <button class="nav-btn toggle-nav"><i class="bar bar-1"></i> <i class="bar bar-2"></i> <i class="bar bar-3"></i>
+  </button>
+  <button class="contact-btn">Nous contacter
+  </button>
+</div>

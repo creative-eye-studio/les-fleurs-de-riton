@@ -1,8 +1,22 @@
 // ABSTRACTS
 @import './abstracts/variables';
+@import './abstracts/mixins';
 
 // BASE
 @import './base/reset';
+@import './base/typography';
 
 // COMPONENTS
+@import './components/mobile-bar';
 @import './components/parallax';
+@import './components/buttons';
+
+// LAYOUTS
+@import './layouts/header';
+@import './layouts/navigation';
+@import './layouts/home';
+@import './layouts/about';
+@import './layouts/services';
+@import './layouts/contact';
+@import './layouts/forms';
+@import './layouts/footer';

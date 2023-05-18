@@ -1,7 +1,7 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
     globals:
-        site_name: "Nom du site"
+        site_name: "Les Fleurs de Riton"
         fb_pixel: ""
         google_maps: 'XXX'
         gtm: 'XXX'

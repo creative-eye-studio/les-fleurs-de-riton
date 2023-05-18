@@ -16,7 +16,9 @@ CKEDITOR.editorConfig = function( config ) {
 	config.defaultLanguage = 'fr';
 	config.emailProtection = 'encode';
 	config.entities = false;
-	config.extraAllowedContent = 'i';
+	config.extraAllowedContent = 'i(*)';
 	config.extraPlugins = 'codemirror,templates,video,widget';
 	config.height = 300;
 };
+
+CKEDITOR.dtd.$removeEmpty['i'] = false;
