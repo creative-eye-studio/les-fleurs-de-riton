@@ -8,9 +8,21 @@ $color: #2d4757;
 $color-s: #f9fa93;
 $color-s-l: lighten(#f9fa93, 17.5%);
 
-// MARGINS
-$marge-m: 2rem;
-
 // HEADER - NAV
 $header-ht: 80px;
 $mobbar-ht: 60px;
+
+// GRID
+$grid-size: 12;
+$padding-col: 1rem;
+
+// MARGES
+$marge-m: 2rem;
+$marge-d-x: 10vw;
+$marge-d-y: 5vw;
+
+// SCREEN SIZES
+$lg: '1440px';
+$md: '1024px';
+$sm: '768px';
+$xs: '640px';
