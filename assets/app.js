@@ -14,7 +14,6 @@ import './bootstrap';
 import { ScrollWeb } from './smoothScroll';
 import { Parallax } from './parallax';
 import * as Vue from 'vue';
-import AOS from 'aos';
 
 // Variables
 // -----------------------------------------------
@@ -30,7 +29,6 @@ var values = {
 // -----------------------------------------------
 document.addEventListener('DOMContentLoaded', function(){
     Vue.createApp({}).mount('#website');
-    AOS.init();
     scrollWeb();
     parallax();
 })

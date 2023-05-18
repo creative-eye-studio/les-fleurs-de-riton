@@ -1,4 +1,5 @@
 import Scrollbar from 'smooth-scrollbar';
+import AOS from 'aos';
 
 export class ScrollWeb {
 
@@ -8,14 +9,29 @@ export class ScrollWeb {
 
     get init(){
         const container = document.querySelector('#content');
-        const header = document.querySelector('header');
         const scrollbar = Scrollbar.init(container, {
             damping: (this.damping / 100),
             renderByPixels: true,
             continuousScrolling: true,
             delegateTo: document,
             thumbMinSize: 15
-            // alwaysShowTracks: true,
+        });
+
+        // Animate on Scroll
+        AOS.init({
+            duration: 1000,
+            delay: 200,
+            disable: 'mobile',
+        });
+      
+        [].forEach.call(document.querySelectorAll('[data-aos]'), (el) => {
+          scrollbar.addListener(() => {
+            if (scrollbar.isVisible(el)) {
+              el.classList.add('aos-animate');
+            } else {
+              el.classList.remove('aos-animate');
+            }
+          });
         });
 
         // Détection du Scroll
@@ -32,10 +48,11 @@ export class ScrollWeb {
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(btn => {
             btn.addEventListener('click', function(){
+                const margin = 100;
                 const target = btn.getAttribute('data-link');
                 const anchor = document.querySelector(target);
-                const offset = anchor.getBoundingClientRect().top - container.getBoundingClientRect().top;
-                scrollbar.scrollIntoView(anchor, { offset });
+                const offset = container.getBoundingClientRect().top - anchor.getBoundingClientRect().top;
+                scrollbar.scrollIntoView(anchor, { top: offset - margin });
                 return false;
             })
         })

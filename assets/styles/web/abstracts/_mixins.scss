@@ -47,6 +47,12 @@
     }
 }
 
+@mixin nav-link($image){
+    background-image: url('../../../../public/uploads/images/pages/' + $image);
+    background-size: cover;
+    background-position: center;
+}
+
 /* #region Typographie */
 @mixin typography($path, $fontFamily, $fontWeight, $fontFile, $fontStyle: false){
     @font-face {
