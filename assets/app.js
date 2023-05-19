@@ -92,6 +92,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // Récupérer l'identifiant de l'onglet correspondant
       const tabId = tab.getAttribute('data-tab');
 
+      // Ajouter la classe active à l'onglet cliqué
+      tab.classList.add('active');
+
       // Afficher le contenu de l'onglet correspondant
       const activeContent = document.getElementById(tabId);
       activeContent.classList.add('active');

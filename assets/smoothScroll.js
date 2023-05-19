@@ -52,7 +52,10 @@ export class ScrollWeb {
                 const target = btn.getAttribute('data-link');
                 const anchor = document.querySelector(target);
                 const offset = container.getBoundingClientRect().top - anchor.getBoundingClientRect().top;
-                scrollbar.scrollIntoView(anchor, { top: offset - margin });
+                scrollbar.scrollIntoView(anchor, { 
+                    offset, 
+                    offsetTop: margin
+                });
                 return false;
             })
         })

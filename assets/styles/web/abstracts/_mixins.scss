@@ -28,6 +28,8 @@
             }
             &::after{
                 transform: rotate(-45deg);
+                position: absolute;
+                top: 0px;
             }
             
         }
