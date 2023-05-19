@@ -1,0 +1,78 @@
+.loader{
+    background-color: $color-d;
+    z-index: 150;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 2rem;
+    overflow: hidden;
+    transition-duration: 1s;
+    transform-origin: 50% 0%;
+    .main-title{
+        opacity: 0;
+        font-family: $font-p;
+        font-size: 9vw;
+        letter-spacing: 0.04em;
+        line-height: 1.5em;
+        animation: textAnim 1.2s ease-out 0s 1 normal forwards;
+    }
+    hr{
+        width: 0%;
+        opacity: 0;
+        animation: lineAnim 2.4s ease-out 0.5s 1 normal forwards;
+        margin: 1.75rem auto 1rem;
+    }
+    .sub-title{
+        opacity: 0;
+        font-family: $font-s;
+        font-size: 4.5vw;
+        line-height: 1.5em;
+    }
+    &.open{
+        transform: translateY(-100%);
+    }
+    @media screen and (min-width: $sm) {
+        .main-title{
+            font-size: 4em;
+        }
+        hr{
+            animation: lineAnimDesk 2.4s ease-out 0.5s 1 normal forwards;
+            margin: 1.75rem auto 2.25rem;
+        }
+        .sub-title{
+            font-size: 1.5rem;
+        }
+    }
+}
+
+@keyframes textAnim {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes lineAnim {
+    0%{
+        width: 0%;
+        opacity: 0;
+    }
+    100%{
+        width: 75%;
+        opacity: 1;
+    }
+}
+
+@keyframes lineAnimDesk {
+    0%{
+        width: 0%;
+        opacity: 0;
+    }
+    100%{
+        width: 100%;
+        opacity: 1;
+    }
+}

@@ -156,3 +156,37 @@ document.addEventListener('DOMContentLoaded', function () {
   const gallery = new Viewer(document.getElementById('services-list'));
   // Then, show one image by click it, or call `gallery.show()`.
 })
+
+
+// AnimeJS
+// -----------------------------------------------
+import anime from 'animejs/lib/anime.es.js';
+document.addEventListener('DOMContentLoaded', function () {
+  var textWrapperTitle = document.querySelector('.main-title');
+  textWrapperTitle.innerHTML = textWrapperTitle.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+  var textWrapperSubTitle = document.querySelector('.sub-title');
+  textWrapperSubTitle.innerHTML = textWrapperSubTitle.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+  
+  anime.timeline({loop: false})
+    .add({
+      targets: '.main-title .letter, .sub-title .letter',
+      translateX: [40,0],
+      translateZ: 0,
+      opacity: [0,1],
+      easing: "easeOutExpo",
+      duration: 1200,
+      delay: (el, i) => 500 + 30 * i
+    })
+})
+
+
+// Loader Site
+// -----------------------------------------------
+document.addEventListener('DOMContentLoaded', function () {
+  function closeLoader(){
+    document.querySelector('.loader').classList.add('open');
+  }
+
+  setTimeout(closeLoader, 3500);
+})
