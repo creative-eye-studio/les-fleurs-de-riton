@@ -7261,6 +7261,11 @@
   "resolved" "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz"
   "version" "1.1.2"
 
+"viewerjs@^1.11.3":
+  "integrity" "sha512-efG3U61Umuj/1x6JAtdvnY9m407C/RkrkFilsMcLEWKDivpjNU3/FeL+feCY1Vkur9aQeBJ+z6K4CCPP7hv6vA=="
+  "resolved" "https://registry.npmjs.org/viewerjs/-/viewerjs-1.11.3.tgz"
+  "version" "1.11.3"
+
 "vue-loader@^17.0.1":
   "integrity" "sha512-qpqEVkKdrAsgyIBMHaiXurDeCuBWqRyKqg2GI4aG3NbggEls+BLqTZdqahbJJh7fm83sz+iz3gg6eDWdbNlG7Q=="
   "resolved" "https://registry.npmjs.org/vue-loader/-/vue-loader-17.1.1.tgz"

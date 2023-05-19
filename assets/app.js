@@ -96,9 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const activeContent = document.getElementById(tabId);
       activeContent.classList.add('active');
     });
-});});
-
-
+  });
+});
 
 
 // Smooth Scroll
@@ -135,3 +134,25 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 
+// ViewerJS
+// -----------------------------------------------
+// You should import the CSS file.
+import 'viewerjs/dist/viewer.css';
+import Viewer from 'viewerjs';
+
+document.addEventListener('DOMContentLoaded', function () {
+  // View an image.
+  const viewer = new Viewer(document.getElementById('image-viewer'), {
+    inline: false,
+    fullscreen: true,
+    viewed() {
+      viewer.zoomTo(1);
+    },
+  });
+  // Then, show the image by clicking it, or call `viewer.show()`.
+
+  // View a list of images.
+  // Note: All images within the container will be found by calling `element.querySelectorAll('img')`.
+  const gallery = new Viewer(document.getElementById('services-list'));
+  // Then, show one image by click it, or call `gallery.show()`.
+})
