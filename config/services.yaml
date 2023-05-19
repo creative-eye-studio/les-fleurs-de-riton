@@ -6,6 +6,8 @@
 parameters:
     app.jwtsecret: '%env(JWT_SECRET)%'
     posts_img_directory: '%kernel.project_dir%/public/uploads/images/posts'
+    mailjet_public: ''
+    mailjet_private: ''
 
 services:
     # default configuration for services in *this* file

@@ -8,6 +8,8 @@ use App\Entity\PostsList;
 use App\Form\ContactFormType;
 use App\Form\NewsletterFormType;
 use Doctrine\Persistence\ManagerRegistry;
+use Mailjet\Client;
+use Mailjet\Resources;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,7 +52,13 @@ class WebPagesIndexController extends AbstractController
         $newsForm = $this->createForm(NewsletterFormType::class);
         $newsForm->handleRequest($request);
         if ($newsForm->isSubmitted() && $newsForm->isValid()) { 
-            
+            $client = new Client($this->getParameter('mailjet_public'), $this->getParameter('mailjet_private'), true, ['version' => 'v3']);
+            $body = [
+                'Email' => $newsForm->get('email')->getData(),
+            ];
+            $response = $client->post(Resources::$Contact, ['id' => '10321450', 'body' => $body]);
+            if (!$response->success())
+                dump($response->getReasonPhrase());
         }
 
         return $this->render('web_pages_views/index.html.twig', [

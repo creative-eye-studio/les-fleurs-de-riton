@@ -6913,26 +6913,10 @@
     "picocolors" "^1.0.0"
     "stable" "^0.1.8"
 
-"swup@^2.0.13":
+"swup@^2.0", "swup@^2.0.13", "swup@^3.0.0":
   "integrity" "sha512-cyqcVG5ZlIwqRjvLhZvYFBoc8vDDZ5V0OMthTOa7OE/xowzqyhGRJ2hvFr6ecnJfpiTJGN5CIq+Ep2G7ty9gcw=="
   "resolved" "https://registry.npmjs.org/swup/-/swup-2.0.19.tgz"
   "version" "2.0.19"
-  dependencies:
-    "delegate-it" "^3.0.1"
-    "opencollective-postinstall" "^2.0.2"
-
-"swup@^2.0":
-  "integrity" "sha512-cyqcVG5ZlIwqRjvLhZvYFBoc8vDDZ5V0OMthTOa7OE/xowzqyhGRJ2hvFr6ecnJfpiTJGN5CIq+Ep2G7ty9gcw=="
-  "resolved" "https://registry.npmjs.org/swup/-/swup-2.0.19.tgz"
-  "version" "2.0.19"
-  dependencies:
-    "delegate-it" "^3.0.1"
-    "opencollective-postinstall" "^2.0.2"
-
-"swup@^3.0.0":
-  "integrity" "sha512-QgYueLK2ayuRZXGz58+xENFIwpXgflePU6SPiP4kcRWLv5s3ldbMKmmlTFto8lnJFu4aG44ZpxIDruli7se15w=="
-  "resolved" "https://registry.npmjs.org/swup/-/swup-3.0.6.tgz"
-  "version" "3.0.6"
   dependencies:
     "delegate-it" "^3.0.1"
     "opencollective-postinstall" "^2.0.2"
