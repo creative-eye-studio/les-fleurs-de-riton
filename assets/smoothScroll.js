@@ -17,6 +17,8 @@ export class ScrollWeb {
             thumbMinSize: 15
         });
 
+        scrollbar.track.xAxis.element.remove()
+
         // Animate on Scroll
         AOS.init({
             duration: 1000,
