@@ -6,6 +6,7 @@ use App\Entity\GlobalSettings;
 use App\Entity\PagesList;
 use App\Entity\PostsList;
 use App\Form\ContactFormType;
+use App\Form\NewsletterFormType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,10 +39,17 @@ class WebPagesIndexController extends AbstractController
             return $this->redirectToRoute('web_index');
         }
 
+        // Formulaure de contact
         $contactForm = $this->createForm(ContactFormType::class);
         $contactForm->handleRequest($request);
-        
         if ($contactForm->isSubmitted() && $contactForm->isValid()) { 
+            
+        }
+
+        // Formulaire de Newsletter
+        $newsForm = $this->createForm(NewsletterFormType::class);
+        $newsForm->handleRequest($request);
+        if ($newsForm->isSubmitted() && $newsForm->isValid()) { 
             
         }
 
@@ -53,7 +61,8 @@ class WebPagesIndexController extends AbstractController
             'meta_title' => $meta_title,
             'meta_desc' => $meta_desc,
             'settings' => $settings,
-            'contact_form' => $contactForm
+            'contact_form' => $contactForm,
+            'news_form' => $newsForm
         ]);
     }
 

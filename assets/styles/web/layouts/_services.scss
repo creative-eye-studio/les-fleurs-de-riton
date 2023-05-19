@@ -1,5 +1,9 @@
 .services{
     background-color: $color-s-l;
+    background-image: url('../../../../public/uploads/images/pages/bg-services.png');
+    background-position: right bottom;
+    background-size: 25%;
+    background-repeat: no-repeat;
     // padding: $marge-m;
     .btn-list{
         margin-bottom: $marge-m;
@@ -13,28 +17,55 @@
             margin: 0 0 1rem;
             font-style: italic;
             font-weight: 500;
-            a{
-                color: black;
-                text-decoration: none;
-            }
+            cursor: pointer;
         }
     }
     .services-list{
         position: relative;
+        overflow: hidden;
         .service-block{
             opacity: 0;
             visibility: hidden;
             transform: translateY(1rem);
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
             transition: 1s;
+            a{
+                color: black;
+            }
+            img{
+                width: 100%;
+            }
             &.active{
                 opacity: 1;
                 visibility: visible;
                 transform: translateY(0);
                 position: relative;
+            }
+        }
+    }
+    @media screen and (min-width: $sm) {
+        .btn-list{
+            ul{
+                text-align: left;
+                li{
+                    position: relative;
+                    &::before{
+                        content: '';
+                        position: absolute;
+                        right: 0;
+                        bottom: -5px;
+                        width: 0%;
+                        height: 1px;
+                        background-color: black;
+                        transition-duration: 1s;
+                    }
+                    &:hover{
+                        &::before{
+                            left: 0;
+                            width: 100%;
+                        }
+                    }
+                }
             }
         }
     }

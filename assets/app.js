@@ -70,43 +70,68 @@ navLink.forEach(btn => {
 
 
 // Service Tabs
-// -----------------------------------------------
-var tabs = require('tabs');
-var container = document.querySelector('.tab-container');
+// ----------------------------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', function() {
+  // Récupérer les éléments de l'onglet et du contenu
+  const tabs = document.querySelectorAll('.tab');
+  const tabContent = document.querySelectorAll('.tab-content > section');
 
-if (container != null) {
-    tabs(container);
-}
+  // Ajouter un gestionnaire d'événements aux onglets
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      // Supprimer la classe active de tous les onglets
+      tabs.forEach((tab) => {
+        tab.classList.remove('active');
+      });
+
+      // Masquer tous les contenus d'onglet
+      tabContent.forEach((content) => {
+        content.classList.remove('active');
+      });
+
+      // Récupérer l'identifiant de l'onglet correspondant
+      const tabId = tab.getAttribute('data-tab');
+
+      // Afficher le contenu de l'onglet correspondant
+      const activeContent = document.getElementById(tabId);
+      activeContent.classList.add('active');
+    });
+});});
+
+
 
 
 // Smooth Scroll
 // -----------------------------------------------
-const anchorLinks = document.querySelectorAll('a[href^="#"]');
-anchorLinks.forEach(function(link) {
-  link.addEventListener('click', function(event) {
-    // Empêcher le comportement par défaut du lien
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', function () {
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  anchorLinks.forEach(function(link) {
+    link.addEventListener('click', function(event) {
+      // Empêcher le comportement par défaut du lien
+      event.preventDefault();
 
-    // Récupérer l'ID de l'ancre cible
-    const targetId = link.getAttribute('href').substring(1);
+      // Récupérer l'ID de l'ancre cible
+      const targetId = link.getAttribute('href').substring(1);
 
-    // Faire défiler jusqu'à l'ancre cible sans changer l'URL
-    scrollSmoothly(targetId);
+      // Faire défiler jusqu'à l'ancre cible sans changer l'URL
+      scrollSmoothly(targetId);
+    });
   });
-});
 
-function scrollSmoothly(targetId) {
-  const targetElement = document.getElementById(targetId);
-  if (targetElement) {
-    // Calculer la position de l'ancre cible
-    const targetOffset = targetElement.offsetTop - 80;
+  function scrollSmoothly(targetId) {
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      // Calculer la position de l'ancre cible
+      const targetOffset = targetElement.offsetTop - 80;
 
-    // Effectuer le défilement en douceur vers l'ancre cible
-    const scrollOptions = {
-      top: targetOffset,
-      behavior: 'smooth'
-    };
-    window.scrollTo(scrollOptions);
+      // Effectuer le défilement en douceur vers l'ancre cible
+      const scrollOptions = {
+        top: targetOffset,
+        behavior: 'smooth'
+      };
+      window.scrollTo(scrollOptions);
+    }
   }
-}
+})
+
 

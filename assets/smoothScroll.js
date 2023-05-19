@@ -56,7 +56,7 @@ export class ScrollWeb {
                 return false;
             })
         })
-
+        
         return scrollbar;
     }
 }

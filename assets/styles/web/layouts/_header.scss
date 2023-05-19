@@ -36,12 +36,14 @@ header{
             display: block;
         }
     }
-    @media screen and (min-width: $lg) {
+    @media screen and (min-width: $sm) {
         height: $header-ht;
         padding: 2rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+    @media screen and (min-width: $lg) {
         &::before{
             height: 0%;
         }

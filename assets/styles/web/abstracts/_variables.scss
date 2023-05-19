@@ -15,8 +15,9 @@ $textLh: 1.5em;
 
 // COLORS
 $color: #2d4757;
+$color-d: darken(#2d4757, 10%);
 $color-s: #f9fa93;
-$color-s-l: lighten(#f9fa93, 17.5%);
+$color-s-l: lighten(#f9fa93, 15%);
 
 // HEADER - NAV
 $header-ht-m: 80px;
