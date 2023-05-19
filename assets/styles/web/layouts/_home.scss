@@ -1,5 +1,4 @@
 .home-screen{
-    // font-family: $font-s;
     padding-top: $header-ht-m;
     .content-home{
         background-color: rgba($color: $color-s-l, $alpha: 1.0);
@@ -27,6 +26,9 @@
             margin: auto;
         }
     }
+    .scroll-down{
+        display: none;
+    }
     @media screen and (min-width: $sm) {
         .text, .image{
             display: flex;
@@ -36,16 +38,13 @@
     }
     @media screen and (min-width: $lg) {
         padding-top: 0;
-        position: relative;
-        height: 100vh;
+        .content-home, .parallax-section{
+            top: 0;
+            left: 0;
+        }
         .content-home{
             background-color: rgba($color: #000, $alpha: 0.5);
             color: white;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
             z-index: 10;
         }
         .text{
@@ -56,20 +55,20 @@
                 font-size: 3vw;
             }
             p{
-                font-size: 1.5vw;
+                font-size: 1.24vw;
             }
-        }
-        .parallax-section{
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
         }
         .image{
             img{
                 width: 60%;
             }
+        }
+        .scroll-down{
+            display: block;
+            bottom: $marge-m;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
         }
     }
 }

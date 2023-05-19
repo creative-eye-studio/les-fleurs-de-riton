@@ -122,10 +122,10 @@
         @include positionInit(fixed);
     }
     &-absolute{
-        @include positionInit('absolute');
+        @include positionInit(absolute);
     }
     &-relative{
-        @include positionInit('relative');
+        @include positionInit(relative);
     }
 }
 /* #endregion Position */
