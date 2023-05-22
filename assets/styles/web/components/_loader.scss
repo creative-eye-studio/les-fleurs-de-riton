@@ -10,12 +10,12 @@
     transition-duration: 1s;
     transform-origin: 50% 0%;
     .main-title{
-        opacity: 0;
+        // opacity: 0;
         font-family: $font-p;
         font-size: 9vw;
-        letter-spacing: 0.04em;
         line-height: 1.5em;
-        animation: textAnim 1.2s ease-out 0s 1 normal forwards;
+        letter-spacing: 0.04em;
+        // animation: textAnim 1.2s ease-out 0s 1 normal forwards;
     }
     hr{
         width: 0%;
@@ -24,7 +24,7 @@
         margin: 1.75rem auto 1rem;
     }
     .sub-title{
-        opacity: 0;
+        // opacity: 0;
         font-family: $font-s;
         font-size: 4.5vw;
         line-height: 1.5em;

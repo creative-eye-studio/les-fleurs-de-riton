@@ -17,33 +17,21 @@
         display: flex;
         flex-direction: column;
         gap: $marge-m;
-        li{
-            flex: 1;
-            a{
-                font: 500 1em/1.5em $font-s;
-                color: white;
-                text-align: center;
-                text-decoration: none;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                height: 100%;
-                padding: $marge-m;
-                background-color: rgba($color: #000000, $alpha: 0.8);
-            }
-            &:nth-child(1){
-                @include nav-link('nav-img-1.jpg')
-            }
-            &:nth-child(2){
-                @include nav-link('nav-img-2.jpg')
-            }
-            &:nth-child(3){
-                @include nav-link('nav-img-3.jpg')
-            }
-            &:nth-child(4){
-                @include nav-link('nav-img-4.jpg')
-            }
+    }
+    li{
+        flex: 1;
+        a{
+            font: 500 1em/1.5em $font-s;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: $marge-m;
+            background-color: rgba($color: #000000, $alpha: 0.8);
         }
     }
     @media screen and (min-width: $lg) {
@@ -65,5 +53,43 @@
 .nav-open{
     .navsite{
         transform: translateX(0%);
+    }
+}
+
+.webp{
+    .navsite{
+        li{
+            &:nth-child(1){
+                @include nav-link('nav-img-1.webp')
+            }
+            &:nth-child(2){
+                @include nav-link('nav-img-2.webp')
+            }
+            &:nth-child(3){
+                @include nav-link('nav-img-3.webp')
+            }
+            &:nth-child(4){
+                @include nav-link('nav-img-4.webp')
+            }
+        }
+    }
+}
+
+.no-webp{
+    .navsite{
+        li{
+            &:nth-child(1){
+                @include nav-link('nav-img-1.jpg')
+            }
+            &:nth-child(2){
+                @include nav-link('nav-img-2.jpg')
+            }
+            &:nth-child(3){
+                @include nav-link('nav-img-3.jpg')
+            }
+            &:nth-child(4){
+                @include nav-link('nav-img-4.jpg')
+            }
+        }
     }
 }

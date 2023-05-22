@@ -1,6 +1,17 @@
+.webp{
+    .services{
+        background-image: url('../../../../public/uploads/images/pages/bg-services.webp');
+    }
+}
+
+.no-webp{
+    .services{
+        background-image: url('../../../../public/uploads/images/pages/bg-services.png');
+    }
+}
+
 .services{
     background-color: $color-s-l;
-    background-image: url('../../../../public/uploads/images/pages/bg-services.png');
     background-position: right bottom;
     background-size: 25%;
     background-repeat: no-repeat;
@@ -38,14 +49,14 @@
         .service-block{
             opacity: 0;
             visibility: hidden;
-            transform: translateY(10rem);
+            transform: translateX(10rem);
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            transition: 1s;
+            transition: opacity 1s, visibility 1s, transform 1s;
             width: 100%;
-            float: left;
+            margin-left: 1rem;
             a{
                 color: black;
             }
@@ -65,9 +76,10 @@
             &.active{
                 opacity: 1;
                 visibility: visible;
-                transform: translateY(0);
+                transform: translateX(0);
                 position: relative;
-                float: inherit;
+                margin-left: 0;
+                // float: inherit;
             }
         }
     }

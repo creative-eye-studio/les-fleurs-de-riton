@@ -10,10 +10,14 @@ import './styles/web/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+import 'viewerjs/dist/viewer.css';
+import Viewer from 'viewerjs';
+import anime from 'animejs/lib/anime.es.js';
+import * as Vue from 'vue';
 
 import { ScrollWeb } from './smoothScroll';
 import { Parallax } from './parallax';
-import * as Vue from 'vue';
+import { ImgConverter } from './imgConverter';
 
 // Variables
 // -----------------------------------------------
@@ -32,6 +36,15 @@ document.addEventListener('DOMContentLoaded', function(){
     scrollWeb();
     parallax();
 })
+
+
+// Img Converter
+// -----------------------------------------------
+function imgConverter(){
+  let imgConverter = new ImgConverter();
+  imgConverter.convertJpgToWebp;
+  return imgConverter;
+}
 
 
 // Smooth Scrollbar
@@ -140,9 +153,6 @@ document.addEventListener('DOMContentLoaded', function () {
 // ViewerJS
 // -----------------------------------------------
 // You should import the CSS file.
-import 'viewerjs/dist/viewer.css';
-import Viewer from 'viewerjs';
-
 document.addEventListener('DOMContentLoaded', function () {
   // View an image.
   const viewer = new Viewer(document.getElementById('image-viewer'), {
@@ -163,7 +173,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // AnimeJS
 // -----------------------------------------------
-import anime from 'animejs/lib/anime.es.js';
 document.addEventListener('DOMContentLoaded', function () {
   var textWrapperTitle = document.querySelector('.main-title');
   textWrapperTitle.innerHTML = textWrapperTitle.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
