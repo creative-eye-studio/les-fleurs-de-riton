@@ -20,3 +20,28 @@ var container = document.querySelector('.tab-container');
 if (container != null) {
     tabs(container);
 }
+
+
+/* IMG TABS
+--------------------------------------------*/
+document.addEventListener('DOMContentLoaded', function() {
+    var deleteButtons = document.querySelectorAll('.img-del');
+
+    deleteButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var id = this.getAttribute('data-id');
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/admin/services/delete-image/' + id);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    // alert(response.message);
+                    // Actualisez votre interface utilisateur en conséquence si nécessaire
+                }
+            };
+            xhr.send();
+            button.classList.add('deleted');
+        });
+    });
+});

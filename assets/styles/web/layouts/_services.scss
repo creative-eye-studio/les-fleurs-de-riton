@@ -73,6 +73,9 @@
                     object-position: center;
                 }
             }
+            .service-images{
+                margin: $marge-m -1rem 0;
+            }
             &.active{
                 opacity: 1;
                 visibility: visible;

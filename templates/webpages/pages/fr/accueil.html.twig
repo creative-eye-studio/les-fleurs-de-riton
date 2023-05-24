@@ -19,6 +19,7 @@
   <figure class="scroll-down position-absolute"><a class="nav-link" data-link="#about" href="#about"><img alt="En savoir plus" src="../uploads/images/pages/arrow-down-solid.png" /></a>
   </figure>
 </section>
+
 <!-- Présentation -->
 <section class="about" id="about">
   <div class="row">
@@ -38,6 +39,7 @@
     </figure>
   </div>
 </section>
+
 <!-- Services -->
 <section class="services padding-all-no-md" id="services">
   <div><img alt="Picture" id="image-viewer" src="" />
@@ -45,113 +47,37 @@
   <div class="row">
     <div class="tabs btn-list col-3 col-sm-12" data-aos="fade-up">
       <ul>
-        <li class="tab active service-btn" data-tab="tab1">Mariages</li>
-        <li class="tab service-btn" data-tab="tab2">Deuil</li>
-        <li class="tab service-btn" data-tab="tab3">Bouquet de saison</li>
-        <li class="tab service-btn" data-tab="tab4">Occasions professionnelles</li>
+        {% for service in services %}
+          <li class="tab service-btn" data-tab="tab{{service.id}}">{{ service.label }}</li>
+        {% endfor %}
       </ul>
     </div>
     <div class="tab-content services-list col-7 col-sm-12" data-aos="fade-up" id="services-list">
-      <section class="tab-pane service-block active" id="tab1">
-        <h2>Une décoration florale à l'image de votre bonheur
-        </h2>
-        <p>Parce que votre mariage est un jour unique, il nécessite toute notre attention. Nous mettons toute notre expérience et notre savoir-faire à votre disposition pour que ce jour reste à jamais gravé dans votre mémoire.
-        </p>
-        <p>Aussi, n’hésitez pas à <a class="nav-link" data-link="#contact" href="#contact">nous contacter</a> afin de fixer un rendez-vous pour cibler au mieux vos attentes et récolter toutes les informations nécessaires à l’élaboration de votre devis.
-        </p>
-        <div class="row">
-          <div class="col-2 col-sm-3 col-xs-6">
-            <figure class="thumb"><img alt="" src="../uploads/images/pages/bg-home.jpg" />
-            </figure>
+      {% for service in services %}
+        <section class="tab-pane service-block" id="tab{{ service.id }}">
+          <h2>{{ service.title }}</h2>
+          {{ service.content | raw }}
+          <div class="service-images row">
+          {% for image in service.servicesImages %}
+            <div class="col-2 col-sm-3 col-xs-6">
+              <figure class="thumb">
+                <img alt="{{ image.imgname }}" src="../uploads/images/services/{{ image.imgname }}" />
+              </figure>
+            </div>
+          {% endfor %}
           </div>
-          <div class="col-2 col-sm-3 col-xs-6">
-            <figure class="thumb"><img alt="" src="../uploads/images/pages/bg-parallax.jpg" />
-            </figure>
-          </div>
-          <div class="col-2 col-sm-3 col-xs-6">
-            <figure class="thumb"><img alt="" src="../uploads/images/pages/about-image.jpg" />
-            </figure>
-          </div>
-        </div>
-      </section>
-      <section class="tab-pane service-block" id="tab2">
-        <h2>Pour un dernier adieu
-        </h2>
-        <p>Pour une cérémonie d'enterrement et rendre hommage au défunt, les fleurs sauront transmettre votre message et tous vos vœux pour un dernier au revoir. Nous vous accompagnerons dans cette démarche en vous apportant notre soutien et notre savoir-faire afin de choisir les fleurs les plus adaptées, que ce soit en gerbes, bouquets, couronnes funéraires..
-        </p>
-        <p>N’hésitez pas à nous contacter par <a href="#" title="Contact par téléphone">téléphone</a> ou sur notre <a class="nav-link" data-link="#contact" href="#contact" title="Formulaire de contact">page de contact</a> afin d’étudier au mieux votre demande.
-        </p>
-        <div class="row">
-          <div class="col-2 col-sm-3 col-xs-6">
-            <figure class="thumb"><img alt="" src="../uploads/images/pages/bg-home.jpg" />
-            </figure>
-          </div>
-          <div class="col-2 col-sm-3 col-xs-6">
-            <figure class="thumb"><img alt="" src="../uploads/images/pages/bg-parallax.jpg" />
-            </figure>
-          </div>
-          <div class="col-2 col-sm-3 col-xs-6">
-            <figure class="thumb"><img alt="" src="../uploads/images/pages/about-image.jpg" />
-            </figure>
-          </div>
-        </div>
-      </section>
-      <section class="tab-pane service-block" id="tab3">
-        <h2>Un bouquet pour sa saison
-        </h2>
-        <p>Les Fleurs, comme les saisons, aiment évoluer au fil du temps. Nous, fleuristes, travaillons avec des fleurs de saison pour toujours avoir de nouvelles matières à travailler, de nouvelles couleurs à découvrir, et de nouveaux parfums à sentir.
-        </p>
-        <p>Alors à chaque saison sa fleure tout comme à chaque dame son bouquet.
-          <br />
-          Mesdames, et Messieurs, n’hésitez pas à <a class="nav-link" data-link="#contact" href="#contact">nous contacter</a> afin de réserver votre bouquet et découvrir de nouveaux horizons au fil des saisons.
-        </p>
-        <div class="row">
-          <div class="col-2 col-sm-3 col-xs-6">
-            <figure class="thumb"><img alt="" src="../uploads/images/pages/bg-home.jpg" />
-            </figure>
-          </div>
-          <div class="col-2 col-sm-3 col-xs-6">
-            <figure class="thumb"><img alt="" src="../uploads/images/pages/bg-parallax.jpg" />
-            </figure>
-          </div>
-          <div class="col-2 col-sm-3 col-xs-6">
-            <figure class="thumb"><img alt="" src="../uploads/images/pages/about-image.jpg" />
-            </figure>
-          </div>
-        </div>
-      </section>
-      <section class="tab-pane service-block" id="tab4">
-        <h2>Particuliers, rendez une fête encore plus colorée !
-          <br />
-          Professionnels,&nbsp;boostez votre visibilité !
-        </h2>
-        <p>Rendez votre fête encore plus belle grâce à la location ponctuelle de plantes ou bouquets pour tous types d’évènements&nbsp;: Salons, réceptions, cocktails, anniversaires, départs à la retraite…
-        </p>
-        <p>Nous proposons aussi, pour les professionnels, des contrats d’abonnements floraux, à la semaine, ou au mois, afin d’aiguayer vos bureaux, ou simplement les sublimer. N’hésitez pas à nous contacter par <a href="#" title="Contact par téléphone">téléphone</a> ou directement sur la section <a class="nav-link" data-link="#contact" href="#contact" title="Formulaire de contact">contact</a> de notre site afin de cibler au mieux vos attentes et élaborer votre devis.
-        </p>
-        <div class="row">
-          <div class="col-2 col-sm-3 col-xs-6">
-            <figure class="thumb"><img alt="" src="../uploads/images/pages/bg-home.jpg" />
-            </figure>
-          </div>
-          <div class="col-2 col-sm-3 col-xs-6">
-            <figure class="thumb"><img alt="" src="../uploads/images/pages/bg-parallax.jpg" />
-            </figure>
-          </div>
-          <div class="col-2 col-sm-3 col-xs-6">
-            <figure class="thumb"><img alt="" src="../uploads/images/pages/about-image.jpg" />
-            </figure>
-          </div>
-        </div>
-      </section>
+        </section>
+      {% endfor %}
     </div>
   </div>
 </section>
+
 <!-- Parallax -->
 <div class="parallax-section">
   <figure class="parallax-element"><img alt="Bouquet de Mariage" src="../uploads/images/pages/bg-parallax.jpg" />
   </figure>
 </div>
+
 <!-- Contact -->
 <section class="contact" id="contact">
   <div class="row">
@@ -176,6 +102,7 @@
     </figure>
   </div>
 </section>
+
 <!-- Newsletter -->
 <section class="newsletter">
   <div class="container">

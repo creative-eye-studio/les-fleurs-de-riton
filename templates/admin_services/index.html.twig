@@ -1,0 +1,21 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Gestion des services{% endblock %}
+
+{% block body %}
+    <section class="block">
+        <a class="btn-link float-right" href="{{ path('app_service_create') }}">Ajouter un service</a>
+        <h2>Liste des services</h2>
+        {% for service in services %}
+            <div class="line">
+                <p>{{ service.pos }} - {{ service.label }}</p>
+                <ul>
+                    <li><a href="{{ path('app_service_update', {id: service.id}) }}">Modifier</a></li>
+                    
+                    <li><a href="">Supprimer</a></li>
+                </ul>
+            </div>    
+        {% endfor %}
+        
+    </section>
+{% endblock %}

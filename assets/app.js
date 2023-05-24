@@ -85,6 +85,10 @@ navLink.forEach(btn => {
 // Service Tabs
 // ----------------------------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function() {
+  const firstTabBtn = document.querySelector('.service-btn');
+  firstTabBtn.classList.add('active');
+  const firstTab = document.querySelector('.service-block');
+  firstTab.classList.add('active');
   // Récupérer les éléments de l'onglet et du contenu
   const tabs = document.querySelectorAll('.tab');
   const tabContent = document.querySelectorAll('.tab-content > section');

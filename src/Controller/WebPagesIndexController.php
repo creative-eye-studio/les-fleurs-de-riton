@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\GlobalSettings;
 use App\Entity\PagesList;
 use App\Entity\PostsList;
+use App\Entity\Services;
 use App\Form\ContactFormType;
 use App\Form\NewsletterFormType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -23,9 +24,11 @@ class WebPagesIndexController extends AbstractController
     // Page Generator
     // -----------------------------------------------------------------------------------------------------------------
     private function showPage(ManagerRegistry $doctrine, Request $request, string $page_id){
+
         $page = $doctrine->getRepository(PagesList::class)->findOneBy(["page_url" => $page_id]);
         $settings = $doctrine->getRepository(GlobalSettings::class)->findOneBy(['id' => 0]);
         $posts = $doctrine->getRepository(PostsList::class)->findAll();
+        $services = $doctrine->getRepository(Services::class)->findBy([], ['pos' => 'ASC', 'title' => 'ASC']);
 
         $statut = $page->isStatus();
 
@@ -62,15 +65,16 @@ class WebPagesIndexController extends AbstractController
         }
 
         return $this->render('web_pages_views/index.html.twig', [
+            'posts' => $posts,
+            'services' => $services,
+            'contact_form' => $contactForm,
+            'news_form' => $newsForm,
+            'page_lang' => $page_lang,
             'page_id' => $page->getPageId(),
             'page_slug' => $page->getPageUrl(),
-            'page_lang' => $page_lang,
-            'posts' => $posts,
             'meta_title' => $meta_title,
             'meta_desc' => $meta_desc,
-            'settings' => $settings,
-            'contact_form' => $contactForm,
-            'news_form' => $newsForm
+            'settings' => $settings
         ]);
     }
 
