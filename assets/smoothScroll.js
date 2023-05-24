@@ -51,7 +51,7 @@ export class ScrollWeb {
         navLinks.forEach(btn => {
             btn.addEventListener('click', function(){
                 const margin = 100;
-                const target = btn.getAttribute('data-link');
+                const target = btn.getAttribute('href') || btn.getAttribute('data-link');
                 const anchor = document.querySelector(target);
                 const offset = container.getBoundingClientRect().top - anchor.getBoundingClientRect().top;
                 scrollbar.scrollIntoView(anchor, { 
