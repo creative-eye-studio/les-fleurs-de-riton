@@ -1,34 +1,30 @@
 .about{
-    padding-top: $marge-m;
+    .text, .image{
+        margin: $marge-m 0 0;
+    }
     .text{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        h2{
-            margin-top: 0;
-        }
     }
     .image{
-        padding: 0;
-        margin-top: $marge-m;
         img{
-            display: block;
+            height: 100%;
+            object-fit: cover;
         }
     }
-    @media screen and (min-width: $sm) {
-        padding-bottom: $marge-m;
-        .image{
-            margin-top: 0;
-            img{
-                height: 100%;
-                object-fit: cover;
-            }
+    @media screen and (min-width: $md) {
+        padding: $marge-m 0;
+        .text, .image{
+            margin: 0;
         }
     }
     @media screen and (min-width: $lg) {
-        padding-top: $marge-d-y;
-        padding-bottom: $marge-d-y;
+        padding: $marge-d-y 0;
         position: relative;
+        .text{
+            padding: $marge-d-y 0;
+        }
         &::before{
             content: '';
             position: absolute;
