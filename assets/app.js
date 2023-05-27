@@ -22,20 +22,20 @@ import { ImgConverter } from './imgConverter';
 // Variables
 // -----------------------------------------------
 var htmlContent = document.querySelector('html');
-var pageDatas = document.querySelector('body');
-var values = {
+const pageDatas = document.querySelector('body');
+const values = {
     damping: pageDatas.dataset.damping,
     scrollImgSpeed: pageDatas.dataset.scrollimg
-}
+};
 
 
 // Instantieur
 // -----------------------------------------------
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', () => {
     Vue.createApp({}).mount('#website');
     scrollWeb();
     parallax();
-})
+});
 
 
 // Img Converter
@@ -50,7 +50,7 @@ function imgConverter(){
 // Smooth Scrollbar
 // -----------------------------------------------
 function scrollWeb() {
-    let scrollWeb = new ScrollWeb(values.damping);
+    const scrollWeb = new ScrollWeb(values.damping);
     scrollWeb.init;
     return scrollWeb;
 }
@@ -58,8 +58,8 @@ function scrollWeb() {
 
 // Parallax
 // -----------------------------------------------
-function parallax(){
-    let parallax = new Parallax(values.damping, values.scrollImgSpeed);
+function parallax() {
+    const parallax = new Parallax(values.damping, values.scrollImgSpeed);
     parallax.initParallax();
     return parallax;
 }
