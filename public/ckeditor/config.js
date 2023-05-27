@@ -3,9 +3,8 @@
  * For licensing, see https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-var jsonStyles = "../../../build/entrypoints.json";
 let xhr = new XMLHttpRequest();
-xhr.open('GET', jsonStyles, false);
+xhr.open('GET', "../../../build/entrypoints.json", false);
 xhr.send();
 
 var baseFile = JSON.parse(xhr.responseText);
@@ -15,15 +14,15 @@ CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
 	config.allowedContent = true;
 	config.baseHref = '/';
-	config.bodyClass = 'no-js';
+	config.bodyClass = 'no-js cms-viewer';
 	config.contentsCss = cssFile;
 	config.defaultLanguage = 'fr';
 	config.emailProtection = 'encode';
 	config.entities = false;
-	config.extraAllowedContent = 'i';
-	config.extraPlugins = 'codemirror,templates,video,widget,responsiveimage';
-	config.removePlugins = 'image';
-	config.height = 300;
+	config.extraAllowedContent = 'i(*)';
+	config.extraPlugins = 'codemirror,templates,video,widget';
+	// config.removePlugins = 'image';
+	config.height = 900;
 };
 
 CKEDITOR.dtd.$removeEmpty['i'] = false;

@@ -1,0 +1,11 @@
+.cms-viewer{
+    .loader{
+        display: none;
+    }
+    header{
+        background-color: $color;
+    }
+    .navsite{
+        transform: translateX(0%);
+    }
+}
