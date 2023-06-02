@@ -16,8 +16,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
+
 class WebPagesIndexController extends AbstractController
 {
+
     #region Page
     // Page Generator
     // -----------------------------------------------------------------------------------------------------------------
@@ -27,6 +29,7 @@ class WebPagesIndexController extends AbstractController
         $settings = $doctrine->getRepository(GlobalSettings::class)->findOneBy(['id' => 0]);
         $posts = $doctrine->getRepository(PostsList::class)->findAll();
         $services = $doctrine->getRepository(Services::class)->findBy([], ['pos' => 'ASC', 'title' => 'ASC']);
+        $mailingVar = $this->getParameter('brevo');
 
         $statut = $page->isStatus();
 
@@ -63,7 +66,7 @@ class WebPagesIndexController extends AbstractController
                 $response = $client->post('https://api.brevo.com/contacts', [
                     'json' => $data,
                     'headers' => [
-                        'Authorization' => 'Bearer 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',
+                        'Authorization' => 'Bearer ' + $mailingVar,
                         'Content-Type' => 'application/json',
                     ],
                 ]);
