@@ -9,8 +9,7 @@ use App\Entity\Services;
 use App\Form\ContactFormType;
 use App\Form\NewsletterFormType;
 use Doctrine\Persistence\ManagerRegistry;
-use Mailjet\Client;
-use Mailjet\Resources;
+use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,13 +53,31 @@ class WebPagesIndexController extends AbstractController
         $newsForm = $this->createForm(NewsletterFormType::class);
         $newsForm->handleRequest($request);
         if ($newsForm->isSubmitted() && $newsForm->isValid()) { 
-            $client = new Client($this->getParameter('mailjet_public'), $this->getParameter('mailjet_private'), true, ['version' => 'v3']);
-            $body = [
-                'Email' => $newsForm->get('email')->getData(),
+            $client = new Client();
+            $data = [
+                'email' => $newsForm->get('email')->getData(),
+                'list_id' => '#4',
             ];
-            $response = $client->post(Resources::$Contact, ['id' => '10321450', 'body' => $body]);
-            if (!$response->success())
-                dump($response->getReasonPhrase());
+
+            try {
+                $response = $client->post('https://api.brevo.com/contacts', [
+                    'json' => $data,
+                    'headers' => [
+                        'Authorization' => 'Bearer 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',
+                        'Content-Type' => 'application/json',
+                    ],
+                ]);
+
+                // Traitez la réponse de l'API Brevo en fonction de vos besoins
+                $statusCode = $response->getStatusCode();
+                $responseBody = $response->getBody()->getContents();
+                
+                // Retournez la réponse ou effectuez des actions supplémentaires si nécessaire
+                return new Response($responseBody, $statusCode);
+            } catch (\Throwable $th) {
+                //throw $th;
+                return new Response($th->getMessage(), 500);
+            }
         }
 
         return $this->render('web_pages_views/index.html.twig', [

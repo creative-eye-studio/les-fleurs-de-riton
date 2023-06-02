@@ -16,6 +16,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.12",
         "friendsofsymfony/ckeditor-bundle": "^2.4",
+        "guzzlehttp/guzzle": "^7.6",
         "helios-ag/fm-elfinder-bundle": "^12.2",
         "mailjet/mailjet-apiv3-php": "^1.5",
         "phpdocumentor/reflection-docblock": "^5.3",
