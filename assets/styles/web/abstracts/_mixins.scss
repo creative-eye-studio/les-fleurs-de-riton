@@ -63,7 +63,7 @@
         @if $fontStyle{
             font-style: italic;
         }
-        src: url($path + $fontFile + '.ttf');
+        src: url($path + $fontFile + '.ttf') format("truetype"), url($path + $fontFile + '.svg') format("svg");
     }
 }
 

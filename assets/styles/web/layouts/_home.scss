@@ -1,7 +1,11 @@
 .home-screen{
     padding-top: $header-ht-m;
+    overflow: hidden;
+    background: rgba($color: #000, $alpha: 1.0) url("../../../../public/uploads/images/pages/bg-home.jpg") center bottom 75%;
+    background-size: cover;
     .content-home{
-        background-color: rgba($color: $color-s-l, $alpha: 1.0);
+        background-color: rgba($color: #000, $alpha: 0.8);
+        color: white;
     }
     .text{
         padding: $marge-m;
@@ -19,8 +23,7 @@
     }
     .image{
         img{
-            width: 80%;
-            height: auto;
+            width: 60%;
             display: block;
             padding: 0 0 $marge-m;
             margin: auto;
@@ -29,11 +32,16 @@
     .scroll-down{
         display: none;
     }
-    @media screen and (min-width: $sm) {
+    @media screen and (min-width: $md) {
         .text, .image{
             display: flex;
             flex-direction: column;
             justify-content: center;
+        }
+        .image{
+            img{
+                width: 50%;
+            }
         }
     }
     @media screen and (min-width: $lg) {
@@ -43,8 +51,7 @@
             left: 0;
         }
         .content-home{
-            background-color: rgba($color: #000, $alpha: 0.5);
-            color: white;
+            background: rgba($color: #000, $alpha: 0.5);
             z-index: 10;
         }
         .text{

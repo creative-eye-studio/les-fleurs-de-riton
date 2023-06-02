@@ -24,19 +24,17 @@ header{
         height: 65%;
         width: auto;
     }
-    button{
+    button, .contact-btn{
         display: none;
         &.nav-btn{
             width: 40px;
             @include nav-btn();
         }
     }
-    @media screen and (min-width: $xs) {
-        button{
+    @media screen and (min-width: $sm) {
+        button, .contact-btn{
             display: block;
         }
-    }
-    @media screen and (min-width: $sm) {
         height: $header-ht;
         padding: 2rem;
         display: flex;
