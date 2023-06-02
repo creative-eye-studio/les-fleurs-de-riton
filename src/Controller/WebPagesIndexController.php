@@ -8,6 +8,7 @@ use App\Entity\PostsList;
 use App\Entity\Services;
 use App\Form\ContactFormType;
 use App\Form\NewsletterFormType;
+use App\Services\FormsService;
 use Doctrine\Persistence\ManagerRegistry;
 use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +24,7 @@ class WebPagesIndexController extends AbstractController
     #region Page
     // Page Generator
     // -----------------------------------------------------------------------------------------------------------------
-    private function showPage(ManagerRegistry $doctrine, Request $request, string $page_id): Response
+    private function showPage(ManagerRegistry $doctrine, Request $request, string $page_id, FormsService $formsService): Response
     {
         $page = $doctrine->getRepository(PagesList::class)->findOneBy(["page_url" => $page_id]);
         $settings = $doctrine->getRepository(GlobalSettings::class)->findOneBy(['id' => 0]);
@@ -31,9 +32,7 @@ class WebPagesIndexController extends AbstractController
         $services = $doctrine->getRepository(Services::class)->findBy([], ['pos' => 'ASC', 'title' => 'ASC']);
         $mailingVar = $this->getParameter('brevo');
 
-        $statut = $page->isStatus();
-
-        if (!$statut) {
+        if (!$page || !$page->isStatus()) {
             throw $this->createNotFoundException("Cette page n'est pas disponible");
         }
         
@@ -48,13 +47,29 @@ class WebPagesIndexController extends AbstractController
         // Formulaure de contact
         $contactForm = $this->createForm(ContactFormType::class);
         $contactForm->handleRequest($request);
+        $formData = [
+            'fname' => $contactForm->get('fname')->getData(),
+            'lname' => $contactForm->get('lname')->getData(),
+            'email' => $contactForm->get('email')->getData(),
+            'tel' => $contactForm->get('tel')->getData(),
+            'subject' => $contactForm->get('subject')->getData(),
+            'message' => $contactForm->get('message')->getData(),
+        ];
+
         if ($contactForm->isSubmitted() && $contactForm->isValid()) { 
-            
+            $formsService->send(
+                $contactForm->get('email')->getData(),
+                'contact@lesfleursderiton.com',
+                $contactForm->get('subject')->getData(),
+                'form-email',
+                $formData
+            );
         }
 
         // Formulaire de Newsletter
         $newsForm = $this->createForm(NewsletterFormType::class);
         $newsForm->handleRequest($request);
+
         if ($newsForm->isSubmitted() && $newsForm->isValid()) { 
             $client = new Client();
             $data = [
@@ -66,20 +81,18 @@ class WebPagesIndexController extends AbstractController
                 $response = $client->post('https://api.brevo.com/contacts', [
                     'json' => $data,
                     'headers' => [
-                        'Authorization' => 'Bearer ' + $mailingVar,
+                        'Authorization' => 'Bearer ' . $mailingVar,
                         'Content-Type' => 'application/json',
                     ],
                 ]);
 
-                // Traitez la réponse de l'API Brevo en fonction de vos besoins
                 $statusCode = $response->getStatusCode();
                 $responseBody = $response->getBody()->getContents();
                 
-                // Retournez la réponse ou effectuez des actions supplémentaires si nécessaire
                 return new Response($responseBody, $statusCode);
             } catch (\Throwable $th) {
-                //throw $th;
-                return new Response($th->getMessage(), 500);
+                throw $th;
+                // return new Response($th->getMessage(), 500);
             }
         }
 
@@ -93,28 +106,29 @@ class WebPagesIndexController extends AbstractController
             'page_slug' => $page->getPageUrl(),
             'meta_title' => $meta_title,
             'meta_desc' => $meta_desc,
-            'settings' => $settings
+            'settings' => $settings,
+            'form_data' => $formData,
         ]);
     }
 
     // Index Page
     // -----------------------------------------------------------------------------------------------------------------
     #[Route('/{_locale}', name: 'web_index', requirements: ['_locale' => 'fr|en'])]
-    public function index(ManagerRegistry $doctrine, Request $request): Response
+    public function index(ManagerRegistry $doctrine, Request $request, FormsService $formsService): Response
     {
-        return $this->showPage($doctrine, $request, 'index');
+        return $this->showPage($doctrine, $request, 'index', $formsService);
     }
 
 
     // Other Page
     // -----------------------------------------------------------------------------------------------------------------
     #[Route('/{_locale}/{page_slug}', name: 'web_page', requirements: ['_locale' => 'fr|en'])]
-    public function page(ManagerRegistry $doctrine, Request $request, string $page_slug): Response
+    public function page(ManagerRegistry $doctrine, Request $request, string $page_slug, FormsService $formsService): Response
     {
         if($page_slug == 'index')
             return $this->redirectBase();
         else
-            return $this->showPage($doctrine, $request, $page_slug);
+            return $this->showPage($doctrine, $request, $page_slug, $formsService);
     }
 
     // Redirections

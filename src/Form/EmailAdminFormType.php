@@ -18,7 +18,8 @@ class EmailAdminFormType extends AbstractType
                 'label' => "Nom de l'Email"
             ])
             ->add('email_content', CKEditorType::class, [
-                'label' => "Contenu de l'Email"
+                'label' => "Contenu de l'Email",
+                'mapped' => false
             ])
             ->add('submit', SubmitType::class, [
                 'label' => "Enregistrer"
