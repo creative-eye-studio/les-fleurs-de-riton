@@ -57,10 +57,19 @@ class WebPagesIndexController extends AbstractController
         ];
 
         if ($contactForm->isSubmitted() && $contactForm->isValid()) { 
+            // E-Mail depuis le formulaire
             $formsService->send(
                 $contactForm->get('email')->getData(),
                 'contact@lesfleursderiton.com',
                 $contactForm->get('subject')->getData(),
+                'form-email',
+                $formData
+            );
+            // E-Mail récapitulatif
+            $formsService->send(
+                'contact@lesfleursderiton.com',
+                $contactForm->get('email')->getData(),
+                "Récapitulatif de votre demande par E-Mail",
                 'form-email',
                 $formData
             );
