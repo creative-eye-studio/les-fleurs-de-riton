@@ -23,6 +23,12 @@ img{
     display: none;
 }
 
+.legal-block{
+    max-width: 1000px;
+    margin: auto;
+    padding: 2rem;
+}
+
 .scroll-content{
     @media screen and (min-width: $lg) {
         height: 100vh;

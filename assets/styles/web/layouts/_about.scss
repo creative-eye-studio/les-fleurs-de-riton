@@ -20,7 +20,7 @@
             object-fit: cover;
         }
     }
-    @media screen and (min-width: $md) {
+    @media screen and (min-width: $sm) {
         padding: $marge-m 0;
         .text, .image{
             margin: 0;

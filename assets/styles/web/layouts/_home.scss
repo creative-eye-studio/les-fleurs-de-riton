@@ -32,7 +32,7 @@
     .scroll-down{
         display: none;
     }
-    @media screen and (min-width: $md) {
+    @media screen and (min-width: $sm) {
         .text, .image{
             display: flex;
             flex-direction: column;

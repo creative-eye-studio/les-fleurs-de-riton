@@ -5,11 +5,20 @@
         display: block;
     }
     input, textarea{
-        width: 100%;
-        padding: .75rem;
-        font-family: $font-s;
+        &:not([type="checkbox"]){
+            width: 100%;
+            padding: .75rem;
+            font-family: $font-s;
+        }
     }
     textarea{
         height: 200px;
+    }
+    &.checkbox{
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: baseline;
+        gap: 1rem;
+        font-size: .8em;
     }
 }
