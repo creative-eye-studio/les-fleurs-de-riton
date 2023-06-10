@@ -3,7 +3,7 @@ name: Déploiement en production
 on:
   push:
     branches:
-      - test  # Changer en la branche sur laquelle vous souhaitez déployer
+      - Test  # Changer en la branche sur laquelle vous souhaitez déployer
 
 jobs:
   build:
