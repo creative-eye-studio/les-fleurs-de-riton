@@ -22,5 +22,5 @@ jobs:
         port: 22
         protocol: ftps
         local-dir: "./"  # Chemin vers votre projet Symfony local
-        server-dir: "/portfolio/projets/lesfleursderiton"  # Chemin vers le répertoire de déploiement sur le serveur de production
+        server-dir: "/portfolio/projets/lesfleursderiton/"  # Chemin vers le répertoire de déploiement sur le serveur de production
       
