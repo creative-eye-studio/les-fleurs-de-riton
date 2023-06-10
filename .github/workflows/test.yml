@@ -16,7 +16,6 @@ jobs:
     - name: Installation des dépendances et mise à jour
       run: |
         composer install --no-dev --optimize-autoloader
-        composer update --no-dev
 
     - name: Configuration de l'URL de la base de données
       run: |
