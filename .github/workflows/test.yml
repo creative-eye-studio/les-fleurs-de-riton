@@ -13,7 +13,7 @@ jobs:
     - name: Checkout du code source
       uses: actions/checkout@v2
 
-    - name: Installation des dépendances
+    - name: Installation des dépendances et mise à jour
       run: |
         composer install --no-dev --optimize-autoloader
         composer update --no-dev
