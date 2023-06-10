@@ -13,10 +13,6 @@ jobs:
     - name: Checkout du code source
       uses: actions/checkout@v2
 
-    - name: Installation des dépendances et mise à jour
-      run: |
-        composer install --no-dev --optimize-autoloader
-
     - name: Configuration de l'URL de la base de données
       run: |
         sed -i 's/DATABASE_URL=.*/DATABASE_URL=mysql://dbu1459051:t2j1t3N4XsR3IPoDrr7K@db5006911697.hosting-data.io/dbs5706445?serverVersion=5.7&charset=utf8mb4/' .env
