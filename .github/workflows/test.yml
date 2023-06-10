@@ -14,7 +14,9 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Installation des dépendances
-      run: composer install --no-dev --optimize-autoloader
+      run: |
+        composer install --no-dev --optimize-autoloader
+        composer update --no-dev
 
     - name: Configuration de l'URL de la base de données
       run: |
