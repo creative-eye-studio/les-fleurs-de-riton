@@ -1,0 +1,54 @@
+name: Déploiement en production
+
+on:
+  push:
+    branches:
+      - test  # Changer en la branche sur laquelle vous souhaitez déployer
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout du code source
+      uses: actions/checkout@v2
+
+    - name: Installation des dépendances
+      run: composer install --no-dev --optimize-autoloader
+
+    - name: Configuration de l'URL de la base de données
+      run: |
+        sed -i 's/DATABASE_URL=.*/DATABASE_URL=mysql://dbu1459051:t2j1t3N4XsR3IPoDrr7K@db5006911697.hosting-data.io/dbs5706445?serverVersion=5.7&charset=utf8mb4/' .env
+        # Remplacez "your_production_database_url" par l'URL de votre base de données en production
+
+    - name: Mise à jour de la base de données
+      run: php bin/console doctrine:migrations:migrate --no-interaction --env=prod
+
+    - name: Compilation des assets
+      run: |
+        yarn install
+        yarn encore prod
+
+    - name: Commit des modifications
+      run: |
+        git config --local user.email "contact@creative-eye.fr"
+        git config --local user.name "creative-eye-studio"
+        git commit -am "Mise à jour de l'URL de la base de données et compilation des assets" --allow-empty
+
+    - name: Push vers la branche de test
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        branch: test  # Changer en la branche sur laquelle vous souhaitez pousser les modifications
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Déploiement SFTP
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: home633537587.1and1-data.host
+        username: u85588472
+        password: ${{ secrets.SFTP_PASSWORD }}  # Définissez le mot de passe SFTP comme secret dans les paramètres du dépôt
+        port: 22
+        protocol: ftps
+        local-dir: "."  # Chemin vers votre projet Symfony local
+        server-dir: "/portfolio/projets/lesfleursderiton"  # Chemin vers le répertoire de déploiement sur le serveur de production
+      
