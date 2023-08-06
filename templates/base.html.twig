@@ -27,16 +27,18 @@
         <meta name="msapplication-config" content="../uploads/images/favicon/browserconfig.xml">
         <meta name="theme-color" content="#2d4757">
     </head>
-    <body {{ stimulus_controller({
-             myswup: {},
-            'symfony/ux-swup/swup': {
-                containers: ['#main', '#nav'],
-                ignoreVisit: [('[data-no-swup]')] 
-            }
+    <body
+        {{ stimulus_controller('symfony/ux-swup/swup', {
+            containers: ['#main', '#nav'],
+            animationSelector: '[class*="transition-"]',
+            theme: 'fade',
+            animateHistoryBrowsing: true,
+            cache: true,
+            debug: false
         }) }}
         data-damping='{% block damping %}{% endblock %}'
         data-scrollimg='{% block scrollimg %}{% endblock %}'>
-    
+
         {% block body %}{% endblock %}
 
         {% block javascripts %}

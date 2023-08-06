@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\GlobalSettings;
+use App\Entity\Menu;
 use App\Entity\PagesList;
 use App\Entity\PostsList;
 use App\Entity\Services;
@@ -14,6 +15,7 @@ use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Intl\Locales;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -26,7 +28,28 @@ class WebPagesIndexController extends AbstractController
     // -----------------------------------------------------------------------------------------------------------------
     private function showPage(ManagerRegistry $doctrine, Request $request, string $page_id, FormsService $formsService): Response
     {
-        $page = $doctrine->getRepository(PagesList::class)->findOneBy(["page_url" => $page_id]);
+        $page_base = $doctrine->getRepository(PagesList::class);
+        $page = $page_base->findOneBy(['page_url' => $page_id]);
+        $post_base = $doctrine->getRepository(PostsList::class);
+        $posts = $post_base->findAll();
+        $menus = $doctrine->getRepository(Menu::class);
+
+        $lang = $request->getLocale();
+        $locales = Locales::getLocales();
+        $localesSite = [
+            $locales[280], // FR
+            $locales[96] // EN
+        ];
+
+        $lang = array_search($lang, $localesSite);
+        $meta_title = $page->getPageMetaTitle()[$lang];
+        $meta_desc = $page->getPageMetaDesc()[$lang];
+        $page_content = $page->getPageContent()[$lang];
+
+        if (!$page || !$page->isStatus()) {
+            return (!$page) ? $this->redirectToRoute('web_index') : throw $this->createNotFoundException("Cette page n'est pas disponible");
+        }
+
         $settings = $doctrine->getRepository(GlobalSettings::class)->findOneBy(['id' => 0]);
         $posts = $doctrine->getRepository(PostsList::class)->findAll();
         $services = $doctrine->getRepository(Services::class)->findBy([], ['pos' => 'ASC', 'title' => 'ASC']);
@@ -106,23 +129,20 @@ class WebPagesIndexController extends AbstractController
         }
 
         return $this->render('web_pages_views/index.html.twig', [
+            'page_content' => htmlspecialchars_decode($page_content),
             'posts' => $posts,
-            'services' => $services,
-            'contact_form' => $contactForm,
-            'news_form' => $newsForm,
-            'page_lang' => $page_lang,
-            'page_id' => $page->getPageId(),
-            'page_slug' => $page->getPageUrl(),
+            'lang' => $lang,
+            'lang_page' => $localesSite[$lang],
             'meta_title' => $meta_title,
             'meta_desc' => $meta_desc,
             'settings' => $settings,
-            'form_data' => $formData,
+            'menus' => $menus,
         ]);
     }
 
     // Index Page
     // -----------------------------------------------------------------------------------------------------------------
-    #[Route('/{_locale}', name: 'web_index', requirements: ['_locale' => 'fr|en'])]
+    #[Route('/{_locale}', name: 'web_index', requirements: ['_locale' => 'fr'])]
     public function index(ManagerRegistry $doctrine, Request $request, FormsService $formsService): Response
     {
         return $this->showPage($doctrine, $request, 'index', $formsService);
@@ -131,13 +151,10 @@ class WebPagesIndexController extends AbstractController
 
     // Other Page
     // -----------------------------------------------------------------------------------------------------------------
-    #[Route('/{_locale}/{page_slug}', name: 'web_page', requirements: ['_locale' => 'fr|en'])]
-    public function page(ManagerRegistry $doctrine, Request $request, string $page_slug, FormsService $formsService): Response
+    #[Route('/{_locale}/{page_slug}', name: 'web_page', requirements: ['_locale' => 'fr'])]
+    public function page(ManagerRegistry $doctrine, Request $request, FormsService $formsService, string $page_slug): Response
     {
-        if($page_slug == 'index')
-            return $this->redirectBase();
-        else
-            return $this->showPage($doctrine, $request, $page_slug, $formsService);
+        return ($page_slug === 'index') ? $this->redirectBase() : $this->showPage($doctrine, $request, $page_slug, $formsService);
     }
 
     // Redirections
@@ -149,25 +166,36 @@ class WebPagesIndexController extends AbstractController
     #endregion
 
     #region Post
-
     // Post Generator
     // -----------------------------------------------------------------------------------------------------------------
     public function showPost(ManagerRegistry $doctrine, Request $request, string $post_url){
         $post = $doctrine->getRepository(PostsList::class)->findOneBy(["post_url" => $post_url]);
-        $statut = $post->isStatus();
+        $menus = $doctrine->getRepository(Menu::class);
+        $statut = $post->isOnline();
+
         if (!$statut) {
             throw $this->createNotFoundException("Cet article n'est pas disponible");
         }
+
+        $lang = $request->getLocale();
+        $locales = Locales::getLocales();
+        $localesSite = [
+            $locales[280], // FR
+            $locales[96] // EN
+        ];
         
-        $post_lang = $request->getLocale();
-        $meta_title = $post->getPostMetaTitle();
-        $meta_desc = $post->getPostMetaDesc();
+        $lang = array_search($lang, $localesSite);
+        $meta_title = $post->getPostMetaTitle()[array_search($lang, $localesSite)];
+        $meta_desc = $post->getPostMetaDesc()[array_search($lang, $localesSite)];
+        $post_content = $post->getPostContent()[array_search($lang, $localesSite)];
 
         return $this->render('web_pages_views/post.html.twig', [
-            'post_id' => $post->getPostId(),
             'post_slug' => $post->getPostUrl(),
             'post_thumb' => $post->getPostThumb(),
-            'post_lang' => $post_lang,
+            'post_content' => htmlspecialchars_decode($post_content),
+            'menus' => $menus,
+            'lang' => $lang,
+            'lang_page' => $localesSite[$lang],
             'meta_title' => $meta_title,
             'meta_desc' => $meta_desc,
         ]);
