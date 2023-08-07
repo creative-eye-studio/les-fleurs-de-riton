@@ -10,14 +10,11 @@ import './styles/web/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
-import 'viewerjs/dist/viewer.css';
 import Viewer from 'viewerjs';
 import anime from 'animejs/lib/anime.es.js';
-import * as Vue from 'vue';
 
 import { ScrollWeb } from './smoothScroll';
 import { Parallax } from './parallax';
-import { createApp } from 'vue';
 import AOS from 'aos';
 
 // Variables
@@ -33,22 +30,11 @@ const values = {
 // Instantieur
 // -----------------------------------------------
 document.addEventListener('DOMContentLoaded', function(){
-    createApp({
-    //     Configuration de votre application Vue.js
-    }).mount('#website');
+    // createApp({}).mount('#website');
     AOS.init();
     scrollWeb();
     parallax();
 });
-
-
-// Img Converter
-// -----------------------------------------------
-function imgConverter(){
-  let imgConverter = new ImgConverter();
-  imgConverter.convertJpgToWebp;
-  return imgConverter;
-}
 
 
 // Smooth Scrollbar

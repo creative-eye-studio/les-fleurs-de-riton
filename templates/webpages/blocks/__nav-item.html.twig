@@ -1,3 +1,4 @@
+{% set navLink = item.navlink ? "nav-link" : '' %}
 {% set targetAttr = item.blank ? 'target="_blank" rel="noopener" data-no-swup="1"' : '' %}
 {% set pageUrl = item.page.pageurl ?? null %}
 {% set postUrl = item.post.posturl ?? null %}
@@ -14,7 +15,7 @@
             {{ cusname ?? item.post.postname[lang] }}
         </a>
     {% else %}
-        <a href="{{ cuslink }}" {{ targetAttr }}>
+        <a href="{{ cuslink }}" {{ targetAttr }} class="{{ navLink }}">
             {{ cusname ?? cuslink }}
         </a>
     {% endif %}

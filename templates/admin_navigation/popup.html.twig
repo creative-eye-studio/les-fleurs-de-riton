@@ -12,6 +12,7 @@
                     {{ form_row(form.cus_link) }}
                 {% endif %}
             </p>
+            <p>{{ form_widget(form.nav_link) }} {{ form_label(form.nav_link) }} </p>
             <p>{{ form_widget(form.blank) }} {{ form_label(form.blank) }} </p>
             <p>{{ form_row(form.submit) }}</p>
         {{ form_end(form) }}

@@ -28,7 +28,10 @@ class NavUpdateLinkFormType extends AbstractType
                 'mapped' => false
             ])
 
-
+            ->add('nav_link', CheckboxType::class, [
+                'label' => 'Lien de scroll',
+                'required' => false
+            ])
             ->add('blank', CheckboxType::class, [
                 'label' => 'Lien externe',
                 'required' => false

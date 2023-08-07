@@ -6,7 +6,7 @@
 	</div>
 </div>
 
-<header id="header">
+<header id="header" class="position-fixed">
 	<button aria-label="Menu de navigation" class="nav-btn toggle-nav">
 		<i class="bar bar-1"></i>
 		<i class="bar bar-2"></i>
@@ -22,3 +22,9 @@
 		<a class="btn nav-link" href="#contact">Nous contacter</a>
 	</span>
 </header>
+
+<nav id="nav" class="navsite">
+	<ul>
+		{{ include('webpages/blocks/_navigation.html.twig', {pos: 0}) }}
+	</ul>
+</nav>

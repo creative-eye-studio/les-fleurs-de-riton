@@ -48,6 +48,9 @@ class MenuLink
     #[ORM\OneToMany(mappedBy: 'menuLink', targetEntity: self::class)]
     private Collection $sous_menus;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $nav_link = null;
+
     public function __construct()
     {
         $this->menuLinks = new ArrayCollection();
@@ -223,6 +226,18 @@ class MenuLink
                 $sousMenu->setMenuLink(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isNavLink(): ?bool
+    {
+        return $this->nav_link;
+    }
+
+    public function setNavLink(?bool $nav_link): static
+    {
+        $this->nav_link = $nav_link;
 
         return $this;
     }

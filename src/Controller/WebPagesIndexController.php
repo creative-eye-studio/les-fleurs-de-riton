@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Locales;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 
 
 
@@ -67,7 +69,7 @@ class WebPagesIndexController extends AbstractController
             return $this->redirectToRoute('web_index');
         }
 
-        // Formulaure de contact
+        #region Formulaire de Contact
         $contactForm = $this->createForm(ContactFormType::class);
         $contactForm->handleRequest($request);
         $formData = [
@@ -97,8 +99,9 @@ class WebPagesIndexController extends AbstractController
                 $formData
             );
         }
+        #endregion
 
-        // Formulaire de Newsletter
+        #region Formulaire de Newsletter
         $newsForm = $this->createForm(NewsletterFormType::class);
         $newsForm->handleRequest($request);
 
@@ -127,6 +130,7 @@ class WebPagesIndexController extends AbstractController
                 // return new Response($th->getMessage(), 500);
             }
         }
+        #endregion
 
         return $this->render('web_pages_views/index.html.twig', [
             'page_content' => htmlspecialchars_decode($page_content),
@@ -137,6 +141,9 @@ class WebPagesIndexController extends AbstractController
             'meta_desc' => $meta_desc,
             'settings' => $settings,
             'menus' => $menus,
+            'services' => $services,
+            'contact_form' => $contactForm->createView(),
+            'news_form' => $newsForm->createView(),
         ]);
     }
 
