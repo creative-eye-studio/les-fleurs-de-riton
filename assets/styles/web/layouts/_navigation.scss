@@ -40,6 +40,7 @@
         bottom: 0;
         ul{
             flex-direction: row;
+            overflow: inherit;
             li{
                 font-size: 1.5em;
                 transition-duration: 1s;

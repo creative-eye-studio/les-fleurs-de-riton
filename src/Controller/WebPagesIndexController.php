@@ -18,9 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Locales;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
-use Twig\Loader\ArrayLoader;
-
-
+use Twig\Loader\FilesystemLoader;
 
 class WebPagesIndexController extends AbstractController
 {
@@ -28,8 +26,10 @@ class WebPagesIndexController extends AbstractController
     #region Page
     // Page Generator
     // -----------------------------------------------------------------------------------------------------------------
-    private function showPage(ManagerRegistry $doctrine, Request $request, string $page_id, FormsService $formsService): Response
+    private function showPage(ManagerRegistry $doctrine, Request $request, string $page_id, FormsService $formsService, Environment $twig): Response
     {
+
+        #region Page
         $page_base = $doctrine->getRepository(PagesList::class);
         $page = $page_base->findOneBy(['page_url' => $page_id]);
         $post_base = $doctrine->getRepository(PostsList::class);
@@ -68,6 +68,12 @@ class WebPagesIndexController extends AbstractController
         } else {
             return $this->redirectToRoute('web_index');
         }
+        #endregion
+
+        #region Templates de code
+        $page_content = htmlspecialchars_decode($page_content);
+        $page_content = $twig->createTemplate($page_content)->render();
+        #endregion
 
         #region Formulaire de Contact
         $contactForm = $this->createForm(ContactFormType::class);
@@ -133,7 +139,7 @@ class WebPagesIndexController extends AbstractController
         #endregion
 
         return $this->render('web_pages_views/index.html.twig', [
-            'page_content' => htmlspecialchars_decode($page_content),
+            'page_content' => $page_content,
             'posts' => $posts,
             'lang' => $lang,
             'lang_page' => $localesSite[$lang],
@@ -150,18 +156,18 @@ class WebPagesIndexController extends AbstractController
     // Index Page
     // -----------------------------------------------------------------------------------------------------------------
     #[Route('/{_locale}', name: 'web_index', requirements: ['_locale' => 'fr'])]
-    public function index(ManagerRegistry $doctrine, Request $request, FormsService $formsService): Response
+    public function index(ManagerRegistry $doctrine, Request $request, FormsService $formsService, Environment $twig): Response
     {
-        return $this->showPage($doctrine, $request, 'index', $formsService);
+        return $this->showPage($doctrine, $request, 'index', $formsService, $twig);
     }
 
 
     // Other Page
     // -----------------------------------------------------------------------------------------------------------------
     #[Route('/{_locale}/{page_slug}', name: 'web_page', requirements: ['_locale' => 'fr'])]
-    public function page(ManagerRegistry $doctrine, Request $request, FormsService $formsService, string $page_slug): Response
+    public function page(ManagerRegistry $doctrine, Request $request, FormsService $formsService, string $page_slug, Environment $twig): Response
     {
-        return ($page_slug === 'index') ? $this->redirectBase() : $this->showPage($doctrine, $request, $page_slug, $formsService);
+        return ($page_slug === 'index') ? $this->redirectBase() : $this->showPage($doctrine, $request, $page_slug, $formsService, $twig);
     }
 
     // Redirections
@@ -216,5 +222,26 @@ class WebPagesIndexController extends AbstractController
         return $this->showPost($doctrine, $request, $post_url);
     }
 
+    #endregion
+
+    #region Template
+    private function showIncludes($contenu, Environment $twig){
+        // Utiliser une expression régulière pour détecter les inclusions spéciales dans le contenu
+        $pattern = '/\{% include \'(.*?)\' with ({.*?}) %\}/';
+        $contenu = preg_replace_callback($pattern, function ($match) use ($twig) {
+            $template = $match[1];
+            $parametres = $match[2];
+            $parametresArray = json_decode($parametres, true);
+
+            // Charger le contenu du template TWIG correspondant avec les paramètres
+            $loader = new FilesystemLoader('/chemin/vers/les/templates');
+            $template = $twig->load($template);
+
+            // Rendre le template avec les paramètres
+            return $template->render($parametresArray);
+        }, $contenu);
+
+        return $contenu;
+    }
     #endregion
 }
