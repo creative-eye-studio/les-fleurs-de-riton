@@ -10,14 +10,19 @@
     .text{
         padding: $marge-m;
         h1{
-            font: 400 .9em/1.5em $font-s;
-            margin: 0;
-        }
-        h2{
-            margin: .25em 0;
-        }
-        p{
-            font: 400 1.25em/1.5em $font-s;
+            font: 400 2em/1.5em $font-s;
+            span{
+                display: block;
+                &:not(:last-child){
+                    margin-bottom: .5rem;
+                }
+            }
+            .small{
+                font: 400 .5em/1.5em $font-s;
+            }
+            .subtitle{
+                font: 400 .7em/1.5em $font-s;
+            }
             margin: 0;
         }
     }
@@ -56,7 +61,13 @@
         }
         .text{
             h1{
-                font-size: 1vw;
+                font-size: 3.275vw;
+                .small{
+                    font-size: 0.32em;
+                }
+                .subtitle{
+                    font-size: 0.38em;
+                }
             }
             h2{
                 font-size: 3vw;

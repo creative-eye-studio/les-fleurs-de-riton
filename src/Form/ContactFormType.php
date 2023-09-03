@@ -27,7 +27,7 @@ class ContactFormType extends AbstractType
                     'class' => 'form-input'
                 ]
             ])
-            ->add('email', TextType::class, [
+            ->add('mail', TextType::class, [
                 'label' => 'Adresse E-Mail',
                 'row_attr' => [
                     'class' => 'form-input'

@@ -4,6 +4,7 @@ framework:
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
+            mailer: 'async://default'
             async:
                 dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
                 options:

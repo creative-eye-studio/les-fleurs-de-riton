@@ -19,12 +19,11 @@
             {{ cusname ?? cuslink }}
         </a>
     {% endif %}
-    {% if item.menulinks %}
+    {% if item.menulinks is not empty %}
         <ul>
             {% for subitem in item.menulinks %}
                 {{ include('webpages/blocks/__nav-item.html.twig', { "pos": pos, "item": subitem }) }}
             {% endfor %}
         </ul>    
     {% endif %}
-    
 </li>

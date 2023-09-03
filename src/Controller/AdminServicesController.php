@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminServicesController extends AbstractController
 {
-    #[Route('/admin/services', name: 'app_admin_services')]
+    #[Route('/admin/services', name: 'admin_services')]
     public function index(ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
