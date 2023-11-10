@@ -4,6 +4,8 @@
 
 body{
     margin: 0 0 $mobbar-ht;
+    letter-spacing: 0.5px;
+    transition-duration: 1s;
     @include font(400, $textSize, $textLh, $font-s);
     @media screen and (min-width: $sm) {
         margin: 0;

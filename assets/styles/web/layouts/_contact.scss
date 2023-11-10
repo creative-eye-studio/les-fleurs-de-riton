@@ -1,39 +1,30 @@
 .contact{
     background-color: $color;
     color: white;
-    h2{
-        margin-top: 0;
-    }
     a{
         color: white;
     }
     .maps{
-        position: relative;
+        // position: relative;
         padding-top: 100%;
         img, .gm-link{
-            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            // height: 100%;
             object-fit: cover;
             object-position: center;
         }
         .gm-link{
-            margin: 0;
             background-color: rgba($color: #000000, $alpha: .65);
             z-index: 50;
+            height: 100%;
             a{
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height: 100%;
                 text-decoration: none;
-                padding: auto;
                 font-weight: 500;
-                font-size: 1.2em;
-                text-align: center;
-                padding: $marge-m;
+                font-size: 1.375em;
             }
         }
     }

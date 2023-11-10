@@ -31,7 +31,7 @@ const values = {
 // -----------------------------------------------
 document.addEventListener('DOMContentLoaded', function(){
     // createApp({}).mount('#website');
-    
+    initAnchor();
     if (window.innerWidth > 1024) {
       scrollWeb();
       parallax();  
@@ -61,19 +61,21 @@ function parallax() {
 
 // Menu Nav
 // -----------------------------------------------
+var htmlContent = document.querySelector('html');
+
 var navBtn = document.querySelectorAll('.toggle-nav');
 navBtn.forEach(btn => {
-    btn.addEventListener('click', function(){
-        htmlContent.classList.toggle('nav-open');
-    })
-})
+    btn.addEventListener('click', function() {
+      htmlContent.classList.toggle('nav-open');
+  });
+});
 
 var navLink = document.querySelectorAll('.nav-link');
-navLink.forEach(btn => {
-    btn.addEventListener('click', function(){
+navLink.forEach(link => {
+    link.addEventListener('click', function() {
         htmlContent.classList.remove('nav-open');
-    })
-})
+    });
+});
 
 
 // Service Tabs
@@ -116,12 +118,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Smooth Scroll
 // -----------------------------------------------
+function initAnchor(){
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  anchorLinks.forEach(function(link) {
+    link.classList.add('nav-link');
+  })
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
   anchorLinks.forEach(function(link) {
-    link.addEventListener('click', function(event) {
+    
+    link.addEventListener('click', function(e) {
       // Empêcher le comportement par défaut du lien
-      event.preventDefault();
+      e.preventDefault();
 
       // Récupérer l'ID de l'ancre cible
       const targetId = link.getAttribute('href').substring(1);
@@ -150,9 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // ViewerJS
 // -----------------------------------------------
-// You should import the CSS file.
 document.addEventListener('DOMContentLoaded', function () {
-  // View an image.
   const viewer = new Viewer(document.getElementById('image-viewer'), {
     inline: false,
     fullscreen: true,
@@ -160,12 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
       viewer.zoomTo(1);
     },
   });
-  // Then, show the image by clicking it, or call `viewer.show()`.
-
-  // View a list of images.
-  // Note: All images within the container will be found by calling `element.querySelectorAll('img')`.
   const gallery = new Viewer(document.getElementById('services-list'));
-  // Then, show one image by click it, or call `gallery.show()`.
 })
 
 
@@ -178,3 +181,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
   setTimeout(closeLoader, 4000);
 })
+
+
+// Formulaire de contact AJAX
+// -----------------------------------------------
+function formAJAX(formId, formResultId) {
+  var form = document.querySelector(formId);
+  
+  form.addEventListener('submit', function(e) {  
+    e.preventDefault();
+    var formData = new FormData(form);
+    var xhr = new XMLHttpRequest();
+    
+    xhr.open(form.getAttribute('method'), form.getAttribute('action'), true);
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var resultElement = document.querySelector(formResultId);
+        resultElement.innerHTML = xhr.responseText;
+      }
+    };
+    xhr.send(formData);
+  })
+}

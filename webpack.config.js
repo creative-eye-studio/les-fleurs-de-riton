@@ -60,7 +60,8 @@ Encore
 
     // uncomment if you use VueJS
     .enableVueLoader(() => {}, {
-        useJsx: true
+        useJsx: true,
+        runtimeCompilerBuild: false
     })
 
     // enables Sass/SCSS support

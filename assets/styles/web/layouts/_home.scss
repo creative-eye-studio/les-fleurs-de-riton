@@ -1,29 +1,29 @@
-.home-screen{
+.home-screen {
     padding-top: $header-ht-m;
     overflow: hidden;
     background: rgba($color: #000, $alpha: 1.0) url("../../../../public/uploads/images/pages/bg-home.jpg") center bottom 75%;
     background-size: cover;
-    .content-home{
+    .content-home {
         background-color: rgba($color: #000, $alpha: 0.8);
         color: white;
     }
-    .text{
+    .text {
         padding: $marge-m;
         h1{
+            margin: 0;
             font: 400 2em/1.5em $font-s;
-            span{
+            span {
                 display: block;
                 &:not(:last-child){
                     margin-bottom: .5rem;
                 }
             }
-            .small{
+            .small {
                 font: 400 .5em/1.5em $font-s;
             }
-            .subtitle{
+            .subtitle {
                 font: 400 .7em/1.5em $font-s;
             }
-            margin: 0;
         }
     }
     .image{
@@ -63,7 +63,7 @@
             h1{
                 font-size: 3.275vw;
                 .small{
-                    font-size: 0.32em;
+                    font-size: 0.31em;
                 }
                 .subtitle{
                     font-size: 0.38em;
@@ -79,6 +79,7 @@
         .image{
             img{
                 width: 60%;
+                padding: 0;
             }
         }
         .scroll-down{
