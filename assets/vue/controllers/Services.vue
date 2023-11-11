@@ -27,7 +27,7 @@
     },
     methods: {
         getDatas() {
-            fetch('https://127.0.0.1:8000/api/services')
+            fetch('https://lesfleursderiton.com/api/services')
             .then(response => {
                 if (!response.ok) {
                 throw new Error('La requête a échoué');

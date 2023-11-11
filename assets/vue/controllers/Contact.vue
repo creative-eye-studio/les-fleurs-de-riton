@@ -68,7 +68,7 @@ export default {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 };
-                fetch('https://127.0.0.1:8000/api/contact-form', requestOptions)
+                fetch('https://lesfleursderiton.com/api/contact-form', requestOptions)
                       .then(fetchResponse => {
                           if (!fetchResponse.ok) {
                               throw new Error(`La requête a échoué avec le code : ${fetchResponse.status}`);
