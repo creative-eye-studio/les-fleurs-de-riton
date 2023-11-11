@@ -1,0 +1,23 @@
+@font-face {
+  font-family: $ff-title;
+  src: url($policyPathStylish + "Stylish-Regular.ttf") format('truetype'),
+       url($policyPathStylish + "Stylish-Regular.svg") format('svg');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap');
+
+
+$headings: (h1, $fsTitle1), (h2, $fsTitle2), (h3, $fsTitle3), (h4, $fsTitle4), (h5, $fsTitle5);
+
+@each $heading, $fontSize in $headings {
+  #{$heading} {
+    @include font(400, $fontSize, false, $ff-body);
+    @media screen and (min-width: $md) {
+      @include font(400, $fontSize, false, $ff-body);
+    }
+  }
+}
+
+p {
+  @include font(400, $fsBody, false, $ff-body);
+}

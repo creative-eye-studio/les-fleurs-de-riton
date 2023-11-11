@@ -1,0 +1,553 @@
+@mixin nav-btn(){
+    background-color: rgba($color: #fff, $alpha: 0);
+    border: none;
+    position: relative;
+    cursor: pointer;
+    i{
+        &:not(.close-bar){
+            width: 40px;
+            height: 1.75px;
+            background-color: #fff;
+            margin: 10px 0;
+            display: block;
+        }
+        &.close-bar{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            &::before, &::after{
+                width: 40px;
+                height: 1.75px;
+                background-color: #fff;
+                content: '';
+                display: block;
+            }
+            &::before{
+                transform: rotate(45deg);
+            }
+            &::after{
+                transform: rotate(-45deg);
+                position: absolute;
+                top: 0px;
+            }
+            
+        }
+    }
+    @media screen and (min-width: $lg) {
+        i{
+            transition-duration: 1s;
+        }
+        &:hover{
+            .bar-2{
+                width: calc(40px * 0.66);
+            }
+            .bar-3{
+                width: calc(40px * 0.33);
+            }
+        }
+    }
+}
+
+@mixin nav-link($image){
+    background-image: url('../../../../public/uploads/images/pages/' + $image);
+    background-size: cover;
+    background-position: center;
+}
+
+/* #region Typographie */
+@mixin typography($path, $fontFamily, $fontWeight, $fontFile, $fontStyle: false){
+    @font-face {
+        font-family: $fontFamily;
+        font-weight: $fontWeight;
+        @if $fontStyle{
+            font-style: italic;
+        }
+        src: url($path + $fontFile + '.ttf') format("truetype"), url($path + $fontFile + '.svg') format("svg");
+    }
+}
+
+@mixin font($weight, $size, $title, $fontFamily){
+    $fontSize: calc((#{$size} / #{$fsBody}) * 1em);
+    $lineHeight: if($title, calc(#{$lhTitle} * 1em), calc(#{$lhText} * 1em));
+    font: $weight $fontSize/$lineHeight $fontFamily;
+}
+/* #endregion Typographie */
+
+
+/* #region Textes */
+@mixin textAlignInit($side, $size, $start) {
+    @if $start == 0 {
+        @media screen and (min-width: calc($size + 1px)) {
+            text-align: $side;
+        }    
+    } @else if $start == 1 {
+        @media screen and (max-width: $size) {
+            text-align: $side;
+        } 
+    }
+}
+
+@mixin textTransformInit($side, $size, $start) {
+    @if $start == 0 {
+        @media screen and (min-width: calc($size + 1px)) {
+            text-transform: $side;
+        }    
+    } @else if $start == 1 {
+        @media screen and (max-width: $size) {
+            text-transform: $side;
+        } 
+    }
+}
+
+@mixin textAlign($side){
+    text-align: $side;
+    @each $state in no, on {
+        &-#{$state} {
+            @each $breakpoint, $max-width in $breakpoints  {
+                &-#{$breakpoint} {
+                    @include textAlignInit($side, map-get($breakpoints, $breakpoint), if($state == 'on', 1, 0));
+                }
+            }
+        }
+    }
+}
+
+@mixin textTransform($side){
+    text-transform: $side;
+    @each $state in no, on {
+        &-#{$state} {
+            @each $breakpoint, $max-width in $breakpoints  {
+                &-#{$breakpoint} {
+                    @include textTransformInit($side, map-get($breakpoints, $breakpoint), if($state == 'on', 1, 0));
+                }
+            }
+        }
+    }
+}
+/* #endregion */
+
+
+/* #region Grid */
+@mixin flexColSize($size){
+    width: calc(100% / $grid-size) * $size;
+    padding: 0 calc($marge-d-x / 2);
+    &.no-marge{
+        padding: 0;  
+    }  
+    @media screen and (max-width: $sm) {
+        padding: 0 calc($marge-m / 2);
+        &.no-marge{
+            padding: 0;  
+        } 
+    }
+}
+
+@mixin pushColSize($size){
+    margin-left: calc(100% / $grid-size) * $size;
+}
+
+@mixin flexBlockInit(){
+    @for $i from 0 through $grid-size{
+        &-#{$i}{
+            @include flexColSize($i);
+        }
+        &-push-#{$i}{
+            @include pushColSize($i)
+        }
+    }
+}
+
+@mixin respFlexBlockInit($breakpoint, $max-width) {
+    @media screen and (max-width: $max-width) {
+        &-#{$breakpoint} {
+            @include flexBlockInit();
+        }
+    }
+}
+/* #endregion Grid */
+
+
+/* #region Position */
+@mixin positionRespInit($status, $size, $start){
+    @if $start == 0 {
+        @media screen and (min-width: calc($size + 1px)) {
+            position: $status;
+        }    
+    } @else if $start == 1 {
+        @media screen and (max-width: $size) {
+            position: $status;
+        } 
+    }
+}
+
+@mixin positionInit($status) {
+    position: $status;
+    @each $state in no, on {
+        &-#{$state} {
+            @each $breakpoint, $max-width in $breakpoints  {
+                &-#{$breakpoint} {
+                    @include positionRespInit($status, map-get($breakpoints, $breakpoint), if($state == 'on', 1, 0));
+                }
+            }
+        }
+    }
+}  
+/* #endregion Position */
+
+
+/* #region Width / Height */
+@mixin sizeInit($type, $size, $screen, $start){
+    @if $start == 0 {
+        @media screen and (min-width: calc($screen + 1px)) {
+            #{$type}: $size;
+        }    
+    } @else if $start == 1 {
+        @media screen and (max-width: $screen) {
+            #{$type}: $size;
+        } 
+    }
+}
+
+@mixin sizeType($type, $size) {
+    #{$type}: $size;
+    @each $state in no, on {
+        &-#{$state} {
+            @each $breakpoint, $max-width in $breakpoints {
+                &-#{$breakpoint} {
+                    @include sizeInit($type, $size, $max-width, if($state == 'on', 1, 0));
+                }
+            }
+        }
+    }
+}
+
+@mixin sizeInitType($type){
+    @each $class, $value in $sizesValues {
+        &-#{$class} {
+          @include sizeType($type, $value);
+        }
+    }
+}
+/* #endregion Width / Height */
+
+
+/* #region Borders */
+@mixin borderSideInit($side: null){
+    @if $side != null {
+        border-#{$side}: 1px solid grey;
+    } @else {
+        border: 1px solid grey;
+    }
+}
+
+@mixin borderInit($size, $start: 0, $side: null) {
+    @if $start == 0 {
+        @media screen and (min-width: calc($size + 1px)) {
+            @include borderSideInit($side);
+        }
+    } @else if $start == 1 {
+        @media screen and (max-width: $size) {
+            @include borderSideInit($side);
+        }
+    }
+}
+
+@mixin borderResp($start, $side) {
+    @each $breakpoint, $max-width in $breakpoints {
+        &-#{$breakpoint} {
+            @include borderInit($max-width, $start, $side);
+        }
+    }
+}
+/* #endregion Borders */
+
+
+/* #region Marges */
+@mixin margeInit($type, $side){
+    @if $side == 'null' {
+        #{$type}: $marge-d-y $marge-d-x;
+    }
+    @else if $side == 'auto' {
+        #{$type}: auto;
+    }
+    @else if $side == 'none' {
+        #{$type}: 0;
+    }
+    @else if $side == 'top' {
+        #{$type}-top: $marge-d-y;
+    }
+    @else if $side == 'bottom' {
+        #{$type}-bottom: $marge-d-y;
+    }
+    @else if $side == 'left' {
+        #{$type}-left: $marge-d-x;
+    }
+    @else if $side == 'right' {
+        #{$type}-right: $marge-d-x;
+    } 
+    @else {
+        @warn "Invalid value for $side. Use one of: null, auto, none, top, bottom, left, right.";
+    }
+}
+
+@mixin margeResp($type, $side, $size, $cancel: false) {
+    @include margeInit($type, $side);
+    @media screen and (max-width: $size) {
+        @if $cancel != true {
+            @if $side == 'top' or $side == 'bottom' or $side == 'left' or $side == 'right' {
+                #{$type}-#{$side}: $marge-m;
+            } @else if $side == 'null' {  
+                #{$type}: $marge-m;  
+            }
+        } @else {
+            @if $side == 'top' or $side == 'bottom' or $side == 'left' or $side == 'right' {
+                #{$type}-#{$side}: 0;
+            } @else if $side == 'null' {  
+                #{$type}: 0;  
+            }
+        }
+        
+    }
+}
+
+@mixin margeType($type){
+    &-all{
+        @include margeInit($type, 'null');
+        @each $state in on {
+            &-#{$state} {
+                @each $breakpoint, $max-width in $breakpoints {
+                    &-#{$breakpoint} {
+                        @include margeResp($type, 'null', $max-width);
+                    }
+                }
+            }
+        }
+        @each $state in no {
+            &-#{$state} {
+                @each $breakpoint, $max-width in $breakpoints {
+                    &-#{$breakpoint} {
+                        @include margeResp($type, 'null', $max-width, true);
+                    }
+                }
+            }
+        }
+    }
+    &-none{
+        @include margeInit($type, 'none');
+    }
+    &-auto{
+        @include margeInit($type, 'auto');
+    }
+    &-vertical{
+        @include margeInit($type, 'top');
+        @include margeInit($type, 'bottom');
+        @each $state in on {
+            &-#{$state} {
+                @each $breakpoint, $max-width in $breakpoints {
+                    &-#{$breakpoint} {
+                        @include margeResp($type, 'top', $max-width);
+                        @include margeResp($type, 'bottom', $max-width);
+                    }
+                }
+            }
+        }
+        @each $state in no {
+            &-#{$state} {
+                @each $breakpoint, $max-width in $breakpoints {
+                    &-#{$breakpoint} {
+                        @include margeResp($type, 'top', $max-width, true);
+                        @include margeResp($type, 'bottom', $max-width, true);
+                    }
+                }
+            }
+        }
+    }
+    &-horizontal{
+        @include margeInit($type, 'left');
+        @include margeInit($type, 'right');
+        @each $state in on {
+            &-#{$state} {
+                @each $breakpoint, $max-width in $breakpoints {
+                    &-#{$breakpoint} {
+                        @include margeResp($type, 'left', $max-width);
+                        @include margeResp($type, 'right', $max-width);
+                    }
+                }
+            }
+        }
+        @each $state in no {
+            &-#{$state} {
+                @each $breakpoint, $max-width in $breakpoints {
+                    &-#{$breakpoint} {
+                        @include margeResp($type, 'left', $max-width, true);
+                        @include margeResp($type, 'right', $max-width, true);
+                    }
+                }
+            }
+        }
+    }
+    &-top{
+        @include margeInit($type, 'top');
+        &-none{
+            margin-top: 0;
+        }
+        @each $state in on {
+            &-#{$state} {
+                @each $breakpoint, $max-width in $breakpoints {
+                    &-#{$breakpoint} {
+                        @include margeResp($type, 'top', $max-width);
+                    }
+                }
+            }
+        }
+        @each $state in no {
+            &-#{$state} {
+                @each $breakpoint, $max-width in $breakpoints {
+                    &-#{$breakpoint} {
+                        @include margeResp($type, 'top', $max-width, true);
+                    }
+                }
+            }
+        }
+    }
+    &-bottom{
+        @include margeInit($type, 'bottom');
+        &-none{
+            margin-bottom: 0;
+        }
+        @each $state in on {
+            &-#{$state} {
+                @each $breakpoint, $max-width in $breakpoints {
+                    &-#{$breakpoint} {
+                        @include margeResp($type, 'bottom', $max-width);
+                    }
+                }
+            }
+        }
+        @each $state in no {
+            &-#{$state} {
+                @each $breakpoint, $max-width in $breakpoints {
+                    &-#{$breakpoint} {
+                        @include margeResp($type, 'bottom', $max-width, true);
+                    }
+                }
+            }
+        }
+    }
+    &-left{
+        @include margeInit($type, 'left');
+        &-none{
+            margin-left: 0;
+        }
+        @each $state in on {
+            &-#{$state} {
+                @each $breakpoint, $max-width in $breakpoints {
+                    &-#{$breakpoint} {
+                        @include margeResp($type, 'left', $max-width);
+                    }
+                }
+            }
+        }
+        @each $state in no {
+            &-#{$state} {
+                @each $breakpoint, $max-width in $breakpoints {
+                    &-#{$breakpoint} {
+                        @include margeResp($type, 'left', $max-width, true);
+                    }
+                }
+            }
+        }
+    }
+    &-right{
+        @include margeInit($type, 'right');
+        &-none{
+            margin-right: 0;
+        }
+        @each $state in on {
+            &-#{$state} {
+                @each $breakpoint, $max-width in $breakpoints {
+                    &-#{$breakpoint} {
+                        @include margeResp($type, 'right', $max-width);
+                    }
+                }
+            }
+        }
+        @each $state in no {
+            &-#{$state} {
+                @each $breakpoint, $max-width in $breakpoints {
+                    &-#{$breakpoint} {
+                        @include margeResp($type, 'right', $max-width, true);
+                    }
+                }
+            }
+        }
+  }
+}
+/* #endregion Marges */
+
+
+/* #region Display */
+@mixin display($display, $size, $start){
+    @if $start == 0{
+        @media screen and (min-width: calc($size + 1px)) {
+            display: $display;
+        }
+    }
+    @else if $start == 1 {
+        @media screen and (max-width: $size) {
+            display: $display;
+        }
+    }
+}
+
+@mixin displayInit($display) {
+    display: $display;
+    @each $state in no, on {
+        &-#{$state} {
+            @each $breakpoint, $max-width in $breakpoints {
+                &-#{$breakpoint} {
+                    @include display($display, $max-width, if($state == 'on', 1, 0));
+                }
+            }
+        }
+    }
+  }
+/* #endregion Display */
+
+
+/* #region Custom Animate */
+@mixin animate-image($side:"left", $bg-side:"left", $tr-delay: 1s, $tr-duration: 1.5s){
+    position: relative;
+    $transform-origin: if($side == "right", right center, left center);
+    transform-origin: $transform-origin;
+    transform: scaleX(0);
+    transition-duration: $tr-duration;
+    &::before {
+        content: "";
+        background-color: $color;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        z-index: 3;
+        transform: scaleX(1);
+        transition-delay: $tr-delay;
+        transition-duration: $tr-duration;
+        @if $bg-side == "right" {
+            right: 0;
+            transform-origin: right center;
+        } @else {
+            left: 0;
+            transform-origin: left center;
+        }
+    }
+    &.aos-animate{
+        transform: scaleX(1);
+        &::before{
+            transition-delay: $tr-delay;
+            transform: scaleX(0);
+        }
+    }
+}
+/* #endregion Custom Animate */

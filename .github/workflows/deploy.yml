@@ -1,0 +1,21 @@
+name: Deploy to SFTP
+
+on:
+    push:
+      branches:
+        - main
+
+jobs:
+    deploy:
+        name: 🎉 Déploiement sur Serveur
+        runs-on: ubuntu-latest
+        steps:
+            - name: 🚚 Get latest code
+              uses: actions/checkout@v3
+
+            - name: Deploy to SFTP
+              uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+              with:
+                server: ${{ secrets.SFTP_SERVER }}
+                username: ${{ secrets.SFTP_USERNAME }}
+                password: ${{ secrets.SFTP_PASSWORD }}

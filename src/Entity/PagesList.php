@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\PagesListRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PagesListRepository::class)]
@@ -13,8 +16,8 @@ class PagesList
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $page_name;
+    #[ORM\Column]
+    private array $page_name = [];
 
     #[ORM\Column(type: 'string', length: 255)]
     private $page_url;
@@ -25,32 +28,40 @@ class PagesList
     #[ORM\Column]
     private ?bool $blocked_page = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $page_meta_title;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $page_meta_desc;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $page_meta_title_en = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $page_meta_desc_en = null;
-
     #[ORM\Column]
     private ?bool $status = null;
+
+    #[ORM\Column(nullable: true)]
+    private array $page_content = [];
+
+    #[ORM\Column(nullable: true)]
+    private array $page_meta_title = [];
+
+    #[ORM\Column]
+    private array $page_meta_desc = [];
+
+    #[ORM\OneToMany(mappedBy: 'page', targetEntity: MenuLink::class)]
+    private Collection $menuLinks;
+
+    #[ORM\Column]
+    private ?bool $main_page = null;
+
+    public function __construct()
+    {
+        $this->menuLinks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPageName(): ?string
+    public function getPageName(): ?array
     {
         return $this->page_name;
     }
 
-    public function setPageName(string $page_name): self
+    public function setPageName(?array $page_name): self
     {
         $this->page_name = $page_name;
 
@@ -93,54 +104,6 @@ class PagesList
         return $this;
     }
 
-    public function getPageMetaTitle(): ?string
-    {
-        return $this->page_meta_title;
-    }
-
-    public function setPageMetaTitle(string $page_meta_title): self
-    {
-        $this->page_meta_title = $page_meta_title;
-
-        return $this;
-    }
-
-    public function getPageMetaDesc(): ?string
-    {
-        return $this->page_meta_desc;
-    }
-
-    public function setPageMetaDesc(string $page_meta_desc): self
-    {
-        $this->page_meta_desc = $page_meta_desc;
-
-        return $this;
-    }
-
-    public function getPageMetaTitleEn(): ?string
-    {
-        return $this->page_meta_title_en;
-    }
-
-    public function setPageMetaTitleEn(?string $page_meta_title_en): self
-    {
-        $this->page_meta_title_en = $page_meta_title_en;
-
-        return $this;
-    }
-
-    public function getPageMetaDescEn(): ?string
-    {
-        return $this->page_meta_desc_en;
-    }
-
-    public function setPageMetaDescEn(?string $page_meta_desc_en): self
-    {
-        $this->page_meta_desc_en = $page_meta_desc_en;
-
-        return $this;
-    }
-
     public function isStatus(): ?bool
     {
         return $this->status;
@@ -149,6 +112,84 @@ class PagesList
     public function setStatus(bool $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getPageContent(): array
+    {
+        return $this->page_content;
+    }
+
+    public function setPageContent(?array $page_content): static
+    {
+        $this->page_content = $page_content;
+
+        return $this;
+    }
+
+    public function getPageMetaTitle(): array
+    {
+        return $this->page_meta_title;
+    }
+
+    public function setPageMetaTitle(?array $page_meta_title): static
+    {
+        $this->page_meta_title = $page_meta_title;
+
+        return $this;
+    }
+
+    public function getPageMetaDesc(): array
+    {
+        return $this->page_meta_desc;
+    }
+
+    public function setPageMetaDesc(array $page_meta_desc): static
+    {
+        $this->page_meta_desc = $page_meta_desc;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MenuLink>
+     */
+    public function getMenuLinks(): Collection
+    {
+        return $this->menuLinks;
+    }
+
+    public function addMenuLink(MenuLink $menuLink): static
+    {
+        if (!$this->menuLinks->contains($menuLink)) {
+            $this->menuLinks->add($menuLink);
+            $menuLink->setPage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMenuLink(MenuLink $menuLink): static
+    {
+        if ($this->menuLinks->removeElement($menuLink)) {
+            // set the owning side to null (unless already changed)
+            if ($menuLink->getPage() === $this) {
+                $menuLink->setPage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isMainPage(): ?bool
+    {
+        return $this->main_page;
+    }
+
+    public function setMainPage(bool $main_page): static
+    {
+        $this->main_page = $main_page;
 
         return $this;
     }

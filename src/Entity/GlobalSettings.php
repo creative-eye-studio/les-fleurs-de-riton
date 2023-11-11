@@ -11,13 +11,16 @@ class GlobalSettings
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = 0;
 
     #[ORM\Column(nullable: true)]
-    private ?float $damping = null;
+    private ?float $damping = 0;
 
     #[ORM\Column(nullable: true)]
-    private ?float $scrollimg = null;
+    private ?float $scrollimg = 0;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $logo = null;
 
     public function getId(): ?int
     {
@@ -44,6 +47,18 @@ class GlobalSettings
     public function setScrollimg(?float $scrollimg): self
     {
         $this->scrollimg = $scrollimg;
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(?string $logo): static
+    {
+        $this->logo = $logo;
 
         return $this;
     }

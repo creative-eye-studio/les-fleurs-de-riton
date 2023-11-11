@@ -3,11 +3,126 @@
 }
 
 body{
+    margin: 0 0 $mobbar-ht;
+    letter-spacing: 0.5px;
+    transition-duration: 1s;
+    @include font(400, $fsBody, $lhText, $ff-body);
+    @media screen and (min-width: $sm) {
+        margin: 0;
+    }
+}
+
+figure{
     margin: 0;
 }
 
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+#image-viewer{
+    display: none;
+}
+
+.legal-block{
+    max-width: 1000px;
+    margin: auto;
+    padding: 2rem;
+}
+
 .scroll-content{
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: $lg) {
         height: 100vh;
     }
+}
+
+.response{
+    padding: 1rem;
+    &-success{
+        @extend .response;
+        color: #198754;
+        background-color: #d1e7dd;
+    }
+    &-danger{
+        @extend .response;
+        color: #dc3545;
+        background-color: #f8d7da;
+    }
+}
+
+.cover-img{
+    @extend .margin-none;
+    img{
+        @extend .position-absolute;
+        @extend .wd-100;
+        @extend .ht-100;
+    }
+    &-no{
+        &-md{
+            &-32-9{
+                @extend .cover-img;
+                @media screen and (max-width: $md) {
+                    aspect-ratio: 32/9;
+                }
+            }
+            &-21-9{
+                @extend .cover-img;
+                @media screen and (max-width: $md) {
+                    aspect-ratio: 21/9;
+                }
+            }
+            &-16-9{
+                @extend .cover-img;
+                @media screen and (max-width: $md) {
+                    aspect-ratio: 16/9;
+                }
+            }
+            &-4-3{
+                @extend .cover-img;
+                @media screen and (max-width: $md) {
+                    aspect-ratio: 4/3;
+                }
+            }
+            &-3-4{
+                @extend .cover-img;
+                @media screen and (max-width: $md) {
+                    aspect-ratio: 3/4;
+                }
+            }        
+        }
+        &-sm{
+            &-32-9{
+                @extend .cover-img;
+                @media screen and (max-width: $sm) {
+                    aspect-ratio: 32/9;
+                }
+            }
+            &-21-9{
+                @extend .cover-img;
+                @media screen and (max-width: $sm) {
+                    aspect-ratio: 21/9;
+                }
+            }
+            &-16-9{
+                @extend .cover-img;
+                @media screen and (max-width: $sm) {
+                    aspect-ratio: 16/9;
+                }
+            }
+            &-4-3{
+                @extend .cover-img;
+                @media screen and (max-width: $sm) {
+                    aspect-ratio: 4/3;
+                }
+            }
+            &-3-4{
+                @extend .cover-img;
+                @media screen and (max-width: $sm) {
+                    aspect-ratio: 3/4;
+                }
+            }        
+        }
+    }
+    
 }

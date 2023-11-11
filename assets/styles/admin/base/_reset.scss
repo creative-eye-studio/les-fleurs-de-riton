@@ -42,6 +42,10 @@ a{
     }
 }
 
+figure{
+    margin: 0;
+}
+
 .btn-list{
     margin-top: 1.75rem;
     display: flex;
@@ -61,4 +65,12 @@ a{
 
 .float-right{
     float: right;
+}
+
+.mt{
+    margin-top: 1.75rem;
+}
+
+.mb{
+    margin-bottom: 1.75rem;
 }

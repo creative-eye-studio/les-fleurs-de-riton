@@ -2,38 +2,50 @@
 
 namespace App\Controller;
 
+use App\Entity\MenuLink;
 use App\Entity\PostsList;
 use App\Services\PostsService;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminPostsController extends AbstractController
 {
+    private $em;
+    private $postService;
+    private $security;
+    private $postsRepo;
+    private $menusRepo;
+
+    public function __construct(EntityManagerInterface $em, PostsService $postService, Security $security) {
+        $this->em = $em;
+        $this->postService = $postService;
+        $this->security = $security;
+        $this->postsRepo = $this->em->getRepository(PostsList::class);
+        $this->menusRepo = $this->em->getRepository(MenuLink::class);
+    }
 
     /* LISTE DES POSTS
     ------------------------------------------------------- */
     #[Route('/admin/posts', name: 'admin_posts')]
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(): Response
     {
-        $entityManager = $doctrine->getManager();
-        $postsRepo = $entityManager->getRepository(PostsList::class);
-        $posts = $postsRepo->findAll();
-
         return $this->render('posts/index.html.twig', [
-            'controller_name' => 'AdminPostsController',
-            "posts" => $posts
+            "posts" => $this->postsRepo->findAll()
         ]);
     }
+
 
     /* AJOUTER UN POST
     ------------------------------------------------------- */
     #[Route('/admin/posts/ajouter', name: 'admin_posts_add')]
-    public function add_post(PostsService $postService, ManagerRegistry $doctrine, Request $request) {
-
-        $form = $postService->PostManager($doctrine, $request, true);
+    public function add_post(Request $request) 
+    {
+        $form = $this->postService->PostManager($request, $this->security, true);
 
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->redirectToRoute('admin_posts');
@@ -45,17 +57,18 @@ class AdminPostsController extends AbstractController
         ]);
     }
 
+
     /* MODIFIER UN POST
     ------------------------------------------------------- */
     #[Route('/admin/posts/modifier/{post_id}', name: 'admin_posts_modify')]
-    public function modify_post(ManagerRegistry $doctrine, Request $request, String $post_id, PostsService $postService) {
-
+    public function modify_post(Request $request, String $post_id)
+    {
         // Récupération du contenu de la page
-        $postContent = file_get_contents("../templates/webpages/posts/fr/" . $post_id . ".html.twig");
-        $postContentEn = file_get_contents("../templates/webpages/posts/en/" . $post_id . ".html.twig");
+        $post = $this->postsRepo->find($post_id);
 
-        $form = $postService->PostManager($doctrine, $request, false, $post_id);
-        
+        // Initialisation du formulaire
+        $form = $this->postService->PostManager($request, $this->security, false, $post_id);
+
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->redirectToRoute('admin_posts_modify', [
                 'post_id' => $post_id
@@ -64,32 +77,34 @@ class AdminPostsController extends AbstractController
         
         return $this->render('posts/post-manager.html.twig', [
             'form' => $form->createView(),
-            'content' => $postContent,
-            'content_en' => $postContentEn,
             'title' => "Modifier un article",
+            'postName_fr' => $post->getPostName()[0],
+            'metaTitle_fr' => $post->getPostMetaTitle()[0],
+            'metaDesc_fr' => $post->getPostMetaDesc()[0],
+            'postContent_fr' => htmlspecialchars_decode($post->getPostContent()[0]),
         ]);
     }
+
 
     /* SUPPRIMER UN POST
     ------------------------------------------------------- */
     #[Route('/admin/post/supprimer/{post_id}', name: 'admin_posts_delete')]
-    public function delete_post(ManagerRegistry $doctrine, String $post_id)
+    public function delete_post(string $post_id)
     {
-        $entityManager = $doctrine->getManager();
-        $post = $entityManager->getRepository(PostsList::class)->findOneBy(['post_id' => $post_id]);
+        $post = $this->postsRepo->find($post_id);
+        $menuLink = $this->menusRepo->findBy(['post' => $post]);
 
-        if(!$post) {
-            throw $this->createNotFoundException(
-                "Aucune post n'a été trouvé"
-            );
+        if ($post) {
+            if ($menuLink) {
+                foreach($menuLink as $link){
+                    $this->em->remove($link);
+                }
+            }
+            $this->em->remove($post);
+            $this->em->flush();
+        } else {
+            throw $this->createNotFoundException("Aucun post n'a été trouvé");
         }
-
-        $entityManager->remove($post);
-        $entityManager->flush();
-
-        // Suppression du fichier
-        unlink("../templates/webpages/posts/fr/" . $post_id . ".html.twig");
-        unlink("../templates/webpages/posts/en/" . $post_id . ".html.twig");
 
         return $this->redirectToRoute('admin_posts');
     }
