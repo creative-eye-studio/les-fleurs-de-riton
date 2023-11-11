@@ -45,9 +45,9 @@ export class ScrollWeb {
                 document.querySelector('html').classList.remove('onScroll');
             }
         })
-
+        
         // Scroll au click d'une ancre
-        const navLinks = document.querySelectorAll('.nav-link');
+        const navLinks = document.querySelectorAll('a[href^="#"]');
         navLinks.forEach(btn => {
             btn.addEventListener('click', function(){
                 const margin = 100;
@@ -61,7 +61,6 @@ export class ScrollWeb {
                 return false;
             })
         })
-        
         return scrollbar;
     }
 }

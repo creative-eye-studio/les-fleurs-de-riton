@@ -1,45 +1,29 @@
 .container{
+    @extend .margin-auto;
     max-width: 1400px;
-    margin: auto;
-    padding: $padding-col;
     &-fluid{
         max-width: 100%;
-        padding: $padding-col;
     }
 }
 
 .row {
-    display: flex;
+    @extend .d-flex;
     flex-wrap: wrap;
-    .col{
-        // Grille de base
-        @include flexBlockInit();
-        // Grille de desktop
-        @media screen and (max-width: $lg) {
-            &-lg{
-                @include flexBlockInit();
-            }
-        }
-        // Grille de tablette paysage
-        @media screen and (max-width: $md) {
-            &-md{
-                @include flexBlockInit();
-            }
-        }
-        // Grille de tablette portrait
-        @media screen and (max-width: $sm) {
-            &-sm{
-                @include flexBlockInit();
-            }
-        }
-        // Grille de mobile portrait/paysage
-        @media screen and (max-width: $xs) {
-            &-xs{
-                @include flexBlockInit();
-            }
+    padding: 0 calc($marge-d-x / 2);
+    &-no-marge{
+        @extend .row;
+        padding: 0;  
+    } 
+    @media screen and (max-width: $md) {
+        padding: 0 calc($marge-m / 2);
+        &-no-marge{
+            padding: 0;  
+        } 
+    }
+    .col {
+        @include flexBlockInit(); // Grille de base
+        @each $breakpoint, $max-width in $breakpoints {
+            @include respFlexBlockInit($breakpoint, $max-width);
         }
     }
-}
-
-    
-    
+}  

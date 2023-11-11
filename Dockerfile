@@ -1,34 +1,20 @@
-# Utilisez l'image PHP officielle avec la version 8.2 et Apache
 FROM php:8.2-apache
 
-# Installez les dépendances nécessaires
-RUN apt-get update \
-    && apt-get install -y \
-        libicu-dev \
-        libzip-dev \
-        unzip
-
-# Activez les extensions PHP nécessaires
-RUN docker-php-ext-install \
-    intl \
-    zip
-
-# Activez le module Apache mod_rewrite
 RUN a2enmod rewrite
+ 
+RUN apt-get update \
+    && apt-get install -y libzip-dev git wget libicu-dev --no-install-recommends \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Copiez les fichiers de l'application dans le conteneur
-COPY . /var/www/html
+RUN docker-php-ext-install intl pdo pdo_mysql zip
+ 
+RUN wget https://getcomposer.org/download/2.5.1/composer.phar \
+    && mv composer.phar /usr/bin/composer && chmod +x /usr/bin/composer
+ 
+COPY .docker/apache.conf /etc/apache2/sites-enabled/000-default.conf
+COPY . /var/www
+ 
+WORKDIR /var/www
 
-# Définissez le répertoire de travail
-WORKDIR /var/www/html/public
-
-# Installez les dépendances du projet Symfony
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer install --no-scripts --no-autoloader
-
-
-# Exposez le port 80 pour le serveur Apache
-EXPOSE 80
-
-# Démarrez le serveur Apache
-CMD ["apache2-foreground"]
+RUN composer install -n

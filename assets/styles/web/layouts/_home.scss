@@ -8,10 +8,9 @@
         color: white;
     }
     .text {
-        padding: $marge-m;
         h1{
             margin: 0;
-            font: 400 2em/1.5em $font-s;
+            font: 400 2em/1.5em $ff-body;
             span {
                 display: block;
                 &:not(:last-child){
@@ -19,10 +18,10 @@
                 }
             }
             .small {
-                font: 400 .5em/1.5em $font-s;
+                font: 400 .5em/1.5em $ff-body;
             }
             .subtitle {
-                font: 400 .7em/1.5em $font-s;
+                font: 400 .7em/1.5em $ff-body;
             }
         }
     }

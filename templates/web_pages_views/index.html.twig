@@ -1,20 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{# Metas #}
+{# Langue #}
 {% block lang %}{{ lang_page }}{% endblock %}
-{% block title %}{{ meta_title[lang] }}{% endblock %}
-{% block desc %}{{ meta_desc[lang] }}{% endblock %}
+{# Metas #}
+{% block title %}{{ meta_title }}{% endblock %}
+{% block desc %}{{ meta_desc }}{% endblock %}
+{# Settings #}
 {% block damping %}{{ settings.damping }}{% endblock %}
 {% block scrollimg %}{{ settings.scrollimg }}{% endblock %}
 
 {% block body %}
-    {% include "webpages/blocks/header.html.twig" %}
     <div id="content">
         <div id="website">
             <main id="main">
                 {{ page_content | convert_shortcode | raw }}
-                {{ include('webpages/blocks/services.html.twig') }}
-                {{ include('webpages/blocks/contact.html.twig') }}
                 {{ include('webpages/blocks/newsletter.html.twig') }}
             </main>
             {% include "webpages/blocks/footer.html.twig" %}

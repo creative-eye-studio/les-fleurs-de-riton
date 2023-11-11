@@ -21,8 +21,8 @@ CKEDITOR.editorConfig = function( config ) {
 	config.entities = false;
 	config.extraAllowedContent = 'i(*)';
 	config.extraPlugins = 'codemirror,templates,video,widget';
-	// config.removePlugins = 'image';
 	config.height = 900;
+	config.startupMode = 'source';
 };
 
 CKEDITOR.dtd.$removeEmpty['i'] = false;

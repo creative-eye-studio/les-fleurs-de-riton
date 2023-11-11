@@ -1,49 +1,23 @@
-/* #region Stylish Font */
-@include typography($policyPathStylish, $font-p, 400, 'Stylish-Regular', true);
-/* #endregion Stylish Font */
-
-/* #region Raleway Font */
-@include typography($policyPathRaleway, $font-s, 100, 'Raleway-Thin');
-@include typography($policyPathRaleway, $font-s, 100, 'Raleway-ThinItalic', true);
-
-@include typography($policyPathRaleway, $font-s, 200, 'Raleway-ExtraLight');
-@include typography($policyPathRaleway, $font-s, 200, 'Raleway-ExtraLightItalic', true);
-
-@include typography($policyPathRaleway, $font-s, 300, 'Raleway-Light');
-@include typography($policyPathRaleway, $font-s, 300, 'Raleway-LightItalic', true);
-
-@include typography($policyPathRaleway, $font-s, 400, 'Raleway-Regular');
-@include typography($policyPathRaleway, $font-s, 400, 'Raleway-Italic', true);
-
-@include typography($policyPathRaleway, $font-s, 500, 'Raleway-Medium');
-@include typography($policyPathRaleway, $font-s, 500, 'Raleway-MediumItalic', true);
-
-@include typography($policyPathRaleway, $font-s, 600, 'Raleway-SemiBold');
-@include typography($policyPathRaleway, $font-s, 600, 'Raleway-SemiBoldItalic', true);
-
-@include typography($policyPathRaleway, $font-s, 700, 'Raleway-Bold');
-@include typography($policyPathRaleway, $font-s, 700, 'Raleway-BoldItalic', true);
-
-@include typography($policyPathRaleway, $font-s, 800, 'Raleway-ExtraBold');
-@include typography($policyPathRaleway, $font-s, 800, 'Raleway-ExtraBoldItalic', true);
-
-@include typography($policyPathRaleway, $font-s, 900, 'Raleway-Black');
-@include typography($policyPathRaleway, $font-s, 900, 'Raleway-BlackItalic', true);
-/* #endregion Raleway Font */
-
-/* #region Typo Titles */
-h2{
-    @include font(400, $title2Size, $titleLh, $font-s);
+@font-face {
+  font-family: $ff-title;
+  src: url($policyPathStylish + "Stylish-Regular.ttf") format('truetype'),
+       url($policyPathStylish + "Stylish-Regular.svg") format('svg');
 }
 
-h3{
-    @include font(400, $title3Size, $titleLh, $font-s);
-}
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap');
 
-p{
-    margin-top: 0;
-    &:last-child{
-        margin-bottom: 0
+
+$headings: (h1, $fsTitle1), (h2, $fsTitle2), (h3, $fsTitle3), (h4, $fsTitle4), (h5, $fsTitle5);
+
+@each $heading, $fontSize in $headings {
+  #{$heading} {
+    @include font(400, $fontSize, false, $ff-body);
+    @media screen and (min-width: $md) {
+      @include font(400, $fontSize, false, $ff-body);
     }
+  }
 }
-/* #endregion Typo Titles */
+
+p {
+  @include font(400, $fsBody, false, $ff-body);
+}

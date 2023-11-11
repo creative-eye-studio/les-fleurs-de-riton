@@ -1,13 +1,4 @@
 .about{
-    .text, .image{
-        margin: $marge-m 0 0;
-        width: 100%;
-    }
-    .text{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
     .image{
         position: relative;
         padding-top: 56%;
@@ -21,11 +12,7 @@
         }
     }
     @media screen and (min-width: $sm) {
-        padding: $marge-m 0;
-        .text, .image{
-            margin: 0;
-            width: 50%;
-        }
+        // padding: $marge-m 0;
         .image{
             padding-top: inherit;
         }
