@@ -16,9 +16,11 @@
     }
     &.checkbox{
         display: flex;
-        flex-direction: row-reverse;
         align-items: baseline;
         gap: 1rem;
         font-size: .8em;
+        input{
+            margin-top: 0;
+        }
     }
 }

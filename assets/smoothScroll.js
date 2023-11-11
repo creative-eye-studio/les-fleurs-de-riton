@@ -11,40 +11,42 @@ export class ScrollWeb {
         const container = document.querySelector('#content');
         const scrollbar = Scrollbar.init(container, {
             damping: (this.damping / 100),
-            renderByPixels: true,
-            continuousScrolling: true,
+            // renderByPixels: true,
+            // continuousScrolling: true,
             delegateTo: document,
             thumbMinSize: 15
         });
 
-        scrollbar.track.xAxis.element.remove()
+        scrollbar.track.xAxis.element.remove();
 
-        // Animate on Scroll
         AOS.init({
             duration: 1000,
             delay: 200,
             disable: 'mobile',
         });
-      
-        [].forEach.call(document.querySelectorAll('[data-aos]'), (el) => {
-          scrollbar.addListener(() => {
-            if (scrollbar.isVisible(el)) {
-              el.classList.add('aos-animate');
-            } else {
-              el.classList.remove('aos-animate');
-            }
-          });
+
+        const elements = document.querySelectorAll('[data-aos]');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('aos-animate');
+                } else {
+                    entry.target.classList.remove('aos-animate');
+                }
+            });
+        }, { threshold: 0.5 }); // Adjust the threshold as needed
+
+        elements.forEach(el => {
+            observer.observe(el);
         });
 
         // Détection du Scroll
-        scrollbar.addListener(function(){
+        scrollbar.addListener(() => {
             const scrollY = scrollbar.offset.y;
-            if (scrollY > 50) {
-                document.querySelector('html').classList.add('onScroll');
-            } else {
-                document.querySelector('html').classList.remove('onScroll');
-            }
-        })
+            const htmlElement = document.querySelector('html');
+            htmlElement.classList.toggle('onScroll', scrollY > 50);
+        });
+        
         
         // Scroll au click d'une ancre
         const navLinks = document.querySelectorAll('a[href^="#"]');

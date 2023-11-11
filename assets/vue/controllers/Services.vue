@@ -1,5 +1,5 @@
 <template>
-      <div class="tabs btn-list col-3 col-sm-12" data-aos="fade-up">
+      <div class="tabs btn-list col-3 col-sm-12">
         <ul>
           <li v-for="data in datas" :key="data.pos" class="tab service-btn position-relative" :class="{ active: data.isActive }" :data-tab="'tab' + data.id">
             <span @click="selectTab(data)">{{ data.label }}</span>
@@ -7,10 +7,10 @@
         </ul>
       </div>
   
-      <div class="tab-content services-list col-7 col-sm-12" data-aos="fade-up" id="services-list">
+      <div class="tab-content services-list col-9 col-sm-12" id="services-list">
         <section v-for="data in datas" :key="data.id" :class="{ 'tab-pane': true, 'service-block': true, 'active': data.isActive }" :id="'tab' + data.id">
-          <h2 class="margin-top-none">{{ data.label }}</h2>
-          <p>Lorem Ipsum</p>
+          <h2 class="margin-top-none">{{ data.title }}</h2>
+          <div class="content-text" v-html="data.content"></div>
         </section>
       </div>
   </template>
@@ -45,9 +45,8 @@
         },
         selectTab(selectedData) {
             this.datas.forEach(data => {
-            data.isActive = data.id === selectedData.id ? !data.isActive : false;
+                data.isActive = data.id === selectedData.id ? !data.isActive : false;
             });
-            console.log("Cliqué");
         }
     },
   };

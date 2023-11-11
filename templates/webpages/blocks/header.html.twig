@@ -82,8 +82,24 @@
 	</span>
 </header>
 
+<!-- Menu Desktop -->
 <nav id="nav" class="navsite position-fixed">
 	<ul class="ht-100 padding-none margin-none">
 		{{ include('webpages/blocks/_navigation.html.twig', {pos: 0}) }}
 	</ul>
+</nav>
+
+<!-- Menu mobile -->
+<nav class="mobile-nav position-fixed wd-100">
+	<button class="nav-btn toggle-nav">
+		<i class="bar bar-1"></i>
+		<i class="bar bar-2"></i>
+		<i class="bar bar-3"></i>
+		<i class="close-bar"></i>
+	</button>
+	<span>
+		<a href="#contact">
+			Nous contacter
+		</a>
+	</span>
 </nav>

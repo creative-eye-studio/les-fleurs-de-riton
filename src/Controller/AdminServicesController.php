@@ -63,6 +63,7 @@ class AdminServicesController extends AbstractController
 
         return $this->render('admin_services/service-manager.html.twig', [
             'title' => "Créer un service",
+            'content' => "",
             'form' => $form->createView(),
             'images' => $service->getServicesImages()
         ]);
@@ -108,6 +109,7 @@ class AdminServicesController extends AbstractController
         return $this->render('admin_services/service-manager.html.twig', [
             'title' => "Mettre à jour un service",
             'form' => $form->createView(),
+            'content' => htmlspecialchars_decode($service->getContent()),
             'images' => $service->getServicesImages()
         ]);
     }

@@ -10,7 +10,7 @@
     .text {
         h1{
             margin: 0;
-            font: 400 2em/1.5em $ff-body;
+            font: 400 2em/1.5em $ff-title;
             span {
                 display: block;
                 &:not(:last-child){
@@ -20,8 +20,12 @@
             .small {
                 font: 400 .5em/1.5em $ff-body;
             }
+            .title{
+                margin: $marge-m 0;
+            }
             .subtitle {
                 font: 400 .7em/1.5em $ff-body;
+                margin-top: 1rem;
             }
         }
     }

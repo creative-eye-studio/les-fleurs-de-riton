@@ -11,13 +11,14 @@ import './styles/web/app.scss';
 // start the Stimulus application
 import './bootstrap';
 import Viewer from 'viewerjs';
-import anime from 'animejs/lib/anime.es.js';
 
 import { ScrollWeb } from './smoothScroll';
 import { Parallax } from './parallax';
 import { createApp } from 'vue';
 import AOS from 'aos';
+import MobileDetect from 'mobile-detect';
 import Services from './vue/controllers/Services';
+import Contact from './vue/controllers/Contact';
 
 // Variables
 // -----------------------------------------------
@@ -31,17 +32,22 @@ const values = {
 
 // Instantieur
 // -----------------------------------------------
-document.addEventListener('DOMContentLoaded', function(){
-    createApp({
-      components: { Services }
-    }).mount('#website');
-    initAnchor();
-    if (window.innerWidth > 1024) {
-      scrollWeb();
-      parallax();  
-    } else {
-      AOS.init({ disable: true });
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    const app = createApp({
+      components: { Services, Contact },
+      mounted() {
+        const md = new MobileDetect(window.navigator.userAgent);
+        initAnchor();
+        if (!md.mobile()) {
+          scrollWeb();
+          parallax();
+        } else {
+          AOS.init({ disable: 'mobile' })
+        }
+      }
+    });
+    
+    app.mount('#website');
 });
 
 
@@ -80,10 +86,6 @@ navLink.forEach(link => {
         htmlContent.classList.remove('nav-open');
     });
 });
-
-
-// Service Tabs
-// ----------------------------------------------------------------------------------------------
 
 
 // Smooth Scroll

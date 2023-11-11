@@ -17,7 +17,7 @@
                 {{ form_row(form.pos, { 'row_attr': {'class': 'form-input'} }) }}
                 {{ form_row(form.title, { 'row_attr': {'class': 'form-input'} }) }}
                 {{ form_row(form.images, { 'row_attr': {'class': 'form-input'} }) }}
-                {{ form_row(form.content, { 'row_attr': {'class': 'form-input'} }) }}
+                {{ form_row(form.content, { 'row_attr': {'class': 'form-input'}, 'value': content }) }}
                 {{ form_row(form.submit) }}
             {{ form_end(form) }}
             </div>

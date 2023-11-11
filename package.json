@@ -50,6 +50,7 @@
         "grapesjs-blocks-basic": "^1.0.2",
         "gsap": "^3.12.2",
         "loader-utils": "^3.2.1",
+        "mobile-detect": "^1.4.5",
         "rellax": "^1.12.1",
         "smooth-scrollbar": "^8.8.4",
         "sortablejs": "^1.15.0",

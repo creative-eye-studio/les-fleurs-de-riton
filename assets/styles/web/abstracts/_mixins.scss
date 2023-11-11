@@ -266,7 +266,7 @@
 /* #region Marges */
 @mixin margeInit($type, $side){
     @if $side == 'null' {
-        #{$type}: $marge-d-y $marge-d-x !important;
+        #{$type}: $marge-d-y $marge-d-x;
     }
     @else if $side == 'auto' {
         #{$type}: auto;
@@ -518,19 +518,21 @@
 
 /* #region Custom Animate */
 @mixin animate-image($side:"left", $bg-side:"left", $tr-delay: 1s, $tr-duration: 1.5s){
-    @if $side == "right" {
-        transform-origin: right center;
-    } @else {
-        transform-origin: left center;
-    }
+    position: relative;
+    $transform-origin: if($side == "right", right center, left center);
+    transform-origin: $transform-origin;
     transform: scaleX(0);
-    &::before{
+    transition-duration: $tr-duration;
+    &::before {
         content: "";
-        background-color: $colorP;
+        background-color: $color;
+        width: 100%;
+        height: 100%;
         position: absolute;
         top: 0;
         z-index: 3;
-        transition-delay: 0;
+        transform: scaleX(1);
+        transition-delay: $tr-delay;
         transition-duration: $tr-duration;
         @if $bg-side == "right" {
             right: 0;
@@ -539,9 +541,6 @@
             left: 0;
             transform-origin: left center;
         }
-        width: 100%;
-        height: 100%;
-        transform: scaleX(1);
     }
     &.aos-animate{
         transform: scaleX(1);
