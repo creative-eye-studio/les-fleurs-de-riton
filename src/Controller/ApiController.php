@@ -2,17 +2,38 @@
 
 namespace App\Controller;
 
+use App\Entity\Services;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ApiController extends AbstractController
 {
-    #[Route('/api', name: 'app_api')]
-    public function index(): Response
+    private $em;
+    private $servicesRepo;
+
+    function __construct(EntityManagerInterface $em)
     {
-        return $this->render('api/index.html.twig', [
-            'controller_name' => 'ApiController',
-        ]);
+        $this->em = $em;
+        $this->servicesRepo = $this->em->getRepository(Services::class);
+    }
+
+    #[Route('/api/services', name: 'api_services')]
+    public function index(): JsonResponse
+    {
+        $services = $this->servicesRepo->findAll();
+
+        $list = array_map(function ($service) {
+            return [
+                'id' => $service->getId(),
+                'label' => $service->getLabel(),
+                'pos' => $service->getPos(),
+                'title' => $service->getTitle(),
+                'content' => htmlspecialchars_decode($service->getContent()), 
+            ];
+        }, $services);
+
+        return $this->json($list);
     }
 }

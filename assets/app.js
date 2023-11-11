@@ -84,40 +84,6 @@ navLink.forEach(link => {
 
 // Service Tabs
 // ----------------------------------------------------------------------------------------------
-document.addEventListener('DOMContentLoaded', function() {
-  const firstTabBtn = document.querySelector('.service-btn');
-  firstTabBtn.classList.add('active');
-  const firstTab = document.querySelector('.service-block');
-  firstTab.classList.add('active');
-  // Récupérer les éléments de l'onglet et du contenu
-  const tabs = document.querySelectorAll('.tab');
-  const tabContent = document.querySelectorAll('.tab-content > section');
-
-  // Ajouter un gestionnaire d'événements aux onglets
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      // Supprimer la classe active de tous les onglets
-      tabs.forEach((tab) => {
-        tab.classList.remove('active');
-      });
-
-      // Masquer tous les contenus d'onglet
-      tabContent.forEach((content) => {
-        content.classList.remove('active');
-      });
-
-      // Récupérer l'identifiant de l'onglet correspondant
-      const tabId = tab.getAttribute('data-tab');
-
-      // Ajouter la classe active à l'onglet cliqué
-      tab.classList.add('active');
-
-      // Afficher le contenu de l'onglet correspondant
-      const activeContent = document.getElementById(tabId);
-      activeContent.classList.add('active');
-    });
-  });
-});
 
 
 // Smooth Scroll

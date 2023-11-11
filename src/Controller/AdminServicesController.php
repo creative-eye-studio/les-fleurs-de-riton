@@ -35,6 +35,8 @@ class AdminServicesController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) { 
             $service = $form->getData();
+            $service->setContent(htmlentities($form->get('content')->getData()));
+
             $entityManager = $doctrine->getManager();
 
             // Téléchargement des images
@@ -77,6 +79,7 @@ class AdminServicesController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) { 
             $service = $form->getData();
+            $service->setContent(htmlentities($form->get('content')->getData()));
             $entityManager = $doctrine->getManager();
 
             // Téléchargement des images
