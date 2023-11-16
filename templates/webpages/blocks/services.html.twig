@@ -1,0 +1,27 @@
+
+
+<!-- Services -->
+<section class="services padding-all-no-md" id="services">
+  <figure><img alt="Picture" id="image-viewer" src="" /></figure>
+  <div class="row">
+    <div class="tabs btn-list col-3 col-sm-12" data-aos="fade-up">
+      <ul>
+        {% for service in services %}
+        <li class="tab service-btn position-relative" data-tab="tab{{service.id}}">{{ service.label }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="tab-content services-list col-7 col-sm-12" data-aos="fade-up" id="services-list">{% for service in services %}
+      <section class="tab-pane service-block" id="tab{{ service.id }}">
+        <h2>{{ service.title }}</h2>
+        {{ service.content | raw }}
+
+        <div class="service-images row">{% for image in service.servicesImages %}
+          <div class="col-2 col-sm-3 col-xs-6">
+            <figure class="thumb"><img alt="{{ image.imgname }}" src="../uploads/images/services/{{ image.imgname }}" /></figure>
+          </div>
+          {% endfor %}</div>
+      </section>
+      {% endfor %}</div>
+  </div>
+</section>

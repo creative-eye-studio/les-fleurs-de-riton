@@ -1,0 +1,96 @@
+.home-screen {
+    padding-top: $header-ht-m;
+    overflow: hidden;
+    background: rgba($color: #000, $alpha: 1.0) url("../../../../public/uploads/images/pages/bg-home.jpg") center bottom 75%;
+    background-size: cover;
+    .content-home {
+        background-color: rgba($color: #000, $alpha: 0.8);
+        color: white;
+    }
+    .text {
+        h1{
+            margin: 0;
+            font: 400 2em/1.5em $ff-title;
+            span {
+                display: block;
+                &:not(:last-child){
+                    margin-bottom: .5rem;
+                }
+            }
+            .small {
+                font: 400 .5em/1.5em $ff-body;
+            }
+            .title{
+                margin: $marge-m 0;
+            }
+            .subtitle {
+                font: 400 .7em/1.5em $ff-body;
+                margin-top: 1rem;
+            }
+        }
+    }
+    .image{
+        img{
+            width: 60%;
+            display: block;
+            padding: 0 0 $marge-m;
+            margin: auto;
+        }
+    }
+    .scroll-down{
+        display: none;
+    }
+    @media screen and (min-width: $sm) {
+        .text, .image{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .image{
+            img{
+                width: 50%;
+            }
+        }
+    }
+    @media screen and (min-width: $lg) {
+        padding-top: 0;
+        .content-home, .parallax-section{
+            top: 0;
+            left: 0;
+        }
+        .content-home{
+            background: rgba($color: #000, $alpha: 0.5);
+            z-index: 10;
+        }
+        .text{
+            h1{
+                font-size: 3.275vw;
+                .small{
+                    font-size: 0.31em;
+                }
+                .subtitle{
+                    font-size: 0.38em;
+                }
+            }
+            h2{
+                font-size: 3vw;
+            }
+            p{
+                font-size: 1.24vw;
+            }
+        }
+        .image{
+            img{
+                width: 60%;
+                padding: 0;
+            }
+        }
+        .scroll-down{
+            display: block;
+            bottom: $marge-m;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+    }
+}

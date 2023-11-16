@@ -1,0 +1,21 @@
+footer{
+    padding: $marge-m;
+    font-size: .9em;
+    text-align: center;
+    ul{
+        list-style-type: none;
+        padding: 0;
+        margin: 0 0 $marge-m;
+        a{
+            text-decoration: none;
+        }
+    }
+    a{
+        color: black;
+    }
+    @media screen and (min-width: $xs) {
+        ul{
+            margin: 0;
+        }
+    }
+}

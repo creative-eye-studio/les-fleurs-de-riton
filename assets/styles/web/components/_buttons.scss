@@ -1,0 +1,12 @@
+button, .btn{
+    text-decoration: none;
+    &:not(.nav-btn){
+        cursor: pointer;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 2rem;
+        background-color: $color-s;
+        color: black;
+        font: 400 1em/1em $ff-body;
+    }
+}

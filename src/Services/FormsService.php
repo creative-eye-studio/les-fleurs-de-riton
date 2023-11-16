@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 
 class FormsService
 {
@@ -15,23 +16,35 @@ class FormsService
     }
 
     public function send(string $from, string $to, string $subject, string $template, array $context): void {
+        // Validation des arguments
+        if (empty($from) || empty($to) || empty($subject) || empty($template) || empty($context)) {
+            throw new \InvalidArgumentException('Tous les arguments doivent être fournis.');
+        }
+
         $email = (new TemplatedEmail())
             ->from($from)
-            ->to($to)
+            ->to(new Address($to))
             ->subject($subject)
             ->htmlTemplate("emails/$template.html.twig")
             ->context($context);
 
-        $this->mailer->send($email);
+        try {
+            $this->mailer->send($email);
+        } catch (\Exception $e) {
+            echo $e;
+        }
     }
 
-    public function validateRegister(string $userMail, string $user, string $token){
+    public function validateRegister(string $userMail, string $userName,  string $token){
         $this->send(
             'no-reply@creative-eye.fr',
             $userMail,
             "Création de votre compte sur le site",
             'register',
-            compact($user, $token)
+            [
+                'user' => $userName,
+                'token' => $token
+            ]
         );
     }
 }

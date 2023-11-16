@@ -1,0 +1,27 @@
+.form-input{
+    text-align: left;
+    margin-bottom: 1rem;
+    label{
+        display: block;
+    }
+    input, textarea{
+        &:not([type="checkbox"]){
+            width: 100%;
+            padding: .75rem;
+            font-family: $ff-body;
+        }
+    }
+    textarea{
+        height: 200px;
+        font-size: .8em;
+    }
+    &.checkbox{
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        font-size: .8em;
+        input{
+            margin-top: 0;
+        }
+    }
+}
