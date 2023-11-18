@@ -22,14 +22,14 @@ jobs:
         with:
           php-version: '8.2'
 
-      - name: Install dependencies
-        run: composer install --no-dev --optimize-autoloader
-
       - name: Configure Symfony environment
         run: |
           echo "APP_ENV=prod" >> .env.local
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env.local
           php bin/console cache:warmup
+
+      - name: Install dependencies
+        run: composer install --no-dev --optimize-autoloader
 
       - name: Deploy to SFTP
         uses: appleboy/scp-action@v0.1.4
