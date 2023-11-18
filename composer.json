@@ -101,7 +101,12 @@
             "elfinder:install": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "php bin/console doctrine:database:ping --env=prod",
+            "php bin/console doctrine:migrations:migrate --no-interaction --env=prod",
+            "echo 'APP_ENV=prod' >> .env.local",
+            "echo 'DATABASE_URL=${DATABASE_URL}' >> .env.local",
+            "php bin/console cache:clear --env=prod"
         ],
         "post-update-cmd": [
             "@auto-scripts"

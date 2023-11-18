@@ -32,7 +32,6 @@ jobs:
           echo "DATABASE_URL=${DATABASE_URL}" >> .env.local
           php bin/console doctrine:database:ping --env=prod
           php bin/console doctrine:migrations:migrate --no-interaction --env=prod
-          php bin/console cache:warmup
 
       - name: Clear Symfony cache
         run: php bin/console cache:clear --env=prod
