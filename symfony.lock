@@ -251,11 +251,7 @@
         ]
     },
     "symfony/stimulus-bundle": {
-<<<<<<< HEAD
         "version": "2.13",
-=======
-        "version": "2.9",
->>>>>>> 87b6cd1d05cf5c3397b952240c6e79813537188c
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -293,11 +289,7 @@
         "version": "v2.2.0"
     },
     "symfony/ux-swup": {
-<<<<<<< HEAD
         "version": "v2.13.2"
-=======
-        "version": "v2.9.1"
->>>>>>> 87b6cd1d05cf5c3397b952240c6e79813537188c
     },
     "symfony/ux-vue": {
         "version": "v2.7.1"
