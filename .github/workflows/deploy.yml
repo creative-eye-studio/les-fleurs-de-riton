@@ -27,8 +27,8 @@ jobs:
 
       - name: Configure Symfony environment
         run: |
-          echo "APP_ENV=${APP_ENV}" >> .env.local
-          echo "DATABASE_URL=${DATABASE_URL}" >> .env.local
+          echo "APP_ENV=${APP_ENV}" >> .env.local.php
+          echo "DATABASE_URL=${DATABASE_URL}" >> .env.local.php
           php bin/console cache:warmup
 
       - name: Clear Symfony cache
