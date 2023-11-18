@@ -27,13 +27,13 @@ jobs:
 
       - name: Configure Symfony environment
         run: |
-          echo "APP_ENV=prod" >> .env.local
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env.local
+          echo "APP_ENV=${APP_ENV}" >> .env.local
+          echo "DATABASE_URL=${DATABASE_URL}" >> .env.local
           php bin/console cache:warmup
-      
+
       - name: Clear Symfony cache
         run: php bin/console cache:clear --env=prod
-        
+
       - name: Deploy to SFTP
         uses: appleboy/scp-action@v0.1.4
         with:
