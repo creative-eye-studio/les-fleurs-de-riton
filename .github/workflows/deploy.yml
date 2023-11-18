@@ -21,17 +21,17 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-      
-      - name: Test database connection
-        run: php bin/console doctrine:database:ping --env=prod        
 
       - name: Install dependencies
-        run: composer install --no-dev --optimize-autoloader
+        run: |
+          composer install --no-dev --optimize-autoloader
 
       - name: Configure Symfony environment
         run: |
           echo "APP_ENV=${APP_ENV}" >> .env.local
           echo "DATABASE_URL=${DATABASE_URL}" >> .env.local
+          php bin/console doctrine:database:ping --env=prod
+          php bin/console doctrine:migrations:migrate --no-interaction --env=prod
           php bin/console cache:warmup
 
       - name: Clear Symfony cache
