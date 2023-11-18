@@ -23,7 +23,7 @@ jobs:
           php-version: '8.2'
 
       - name: Install dependencies
-        run: composer install --no-dev --optimize-autoloader
+        run: composer install
 
       - name: Configure Symfony environment
         run: |
@@ -41,5 +41,5 @@ jobs:
           username: ${{ secrets.SFTP_USERNAME }}
           password: ${{ secrets.SFTP_PASSWORD }}
           port: ${{ secrets.SFTP_PORT }}
-          source: "." # Local directory to upload
+          source: "., !.docker/*, !.github/*, !.matomo/*" # Local directory to upload
           target: ${{ secrets.SFTP_REMOTE_PATH }} # Remote directory
