@@ -25,7 +25,7 @@ jobs:
       - name: Configure Symfony environment
         run: |
           # Remplacer la valeur de DATABASE_URL dans le fichier .env
-          sed -i 's|DATABASE_URL=.*|DATABASE_URL="${DATABASE_URL}"|g' .env
+          sed -i "s|DATABASE_URL=.*|DATABASE_URL='${DATABASE_URL}'|g" .env
 
       - name: Install Node.js and Yarn
         uses: actions/setup-node@v4
