@@ -21,6 +21,9 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
+      
+      - name: Test database connection
+        run: php bin/console doctrine:database:ping --env=prod        
 
       - name: Install dependencies
         run: composer install --no-dev --optimize-autoloader
