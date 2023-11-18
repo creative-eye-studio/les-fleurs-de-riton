@@ -101,10 +101,10 @@
             "elfinder:install": "symfony-cmd"
         },
         "post-install-cmd": [
-            
+            "@auto-scripts"
         ],
         "post-update-cmd": [
-            
+            "@auto-scripts"
         ]
     },
     "conflict": {
