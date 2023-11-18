@@ -32,6 +32,8 @@ jobs:
 
       - name: Install dependencies
         run: composer install
+
+      - run: yarn install 
       
       - name: Build assets with Yarn encore
         run: yarn encore production
