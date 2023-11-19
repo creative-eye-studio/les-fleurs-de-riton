@@ -67,8 +67,6 @@ function cookiesInit(){
     tarteaucitron.triggerJobsAfterAjaxCall();
 }
 
-cookiesInit();
-
-document.addEventListener('swup:contentReplaced', () => {
+document.addEventListener("DOMContentLoaded", () => {
     cookiesInit();
 });
