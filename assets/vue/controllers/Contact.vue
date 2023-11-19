@@ -29,9 +29,9 @@
             <input type="checkbox" name="rgpd" id="rgpd" v-model="rgpd" required>
             <label for="rgpd">En soumettant ce formulaire, j'accepte que mes données soient utilisées à des fins de relation client tout en sachant que je peux faire une demande de modification ou de suppression de mes données. Le formulaire est protégé par Google ReCaptcha</label>
         </p>
+        <div class="g-recaptcha" data-sitekey="6Ld-AwAVAAAAAEIACZSWM8NkgsUXiZUF_BNxP4Sm"></div>
         <p id="mail-response"></p>
         <button @click="sendMail">Envoyer</button>
-        <div class="g-recaptcha" data-sitekey="6Ld-AwAVAAAAAEIACZSWM8NkgsUXiZUF_BNxP4Sm"></div>
     </form>
 </template>
 
