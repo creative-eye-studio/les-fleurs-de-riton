@@ -31,7 +31,7 @@
         </p>
         <p id="mail-response"></p>
         <button @click="sendMail">Envoyer</button>
-        <div class="g-recaptcha" data-sitekey="6LdXLBMpAAAAABtFvwaoWY3LRXXxhHPk8xBOxx5E"></div>
+        <div class="g-recaptcha" data-sitekey="6Ld-AwAVAAAAAEIACZSWM8NkgsUXiZUF_BNxP4Sm"></div>
     </form>
 </template>
 
