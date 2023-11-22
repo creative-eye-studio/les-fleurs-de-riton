@@ -59,7 +59,7 @@ export default {
 
     async getDatas() {
       try {
-        const response = await fetch('https://127.0.0.1:8000/api/services');
+        const response = await fetch('https://lesfleursderiton.com/api/services');
         if (!response.ok) {
           throw new Error('La requête a échoué');
         }
@@ -72,7 +72,7 @@ export default {
     },
     async getImages() {
       try {
-        const response = await fetch('https://127.0.0.1:8000/api/services-images');
+        const response = await fetch('https://lesfleursderiton.com/api/services-images');
         if (!response.ok) {
           throw new Error('La requête a échoué');
         }
