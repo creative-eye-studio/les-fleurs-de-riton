@@ -74,7 +74,7 @@
                 }
             }
             .service-images{
-                margin: $marge-m -1rem 0;
+                gap: $marge-m;
             }
             &.active{
                 opacity: 1;

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Services;
+use App\Entity\ServicesImages;
 use App\Services\FormsService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +15,7 @@ class ApiController extends AbstractController
 {
     private $em;
     private $servicesRepo;
+    private $servImgRepo;
     private $request;
     private $formService;
 
@@ -21,6 +23,7 @@ class ApiController extends AbstractController
     {
         $this->em = $em;
         $this->servicesRepo = $this->em->getRepository(Services::class);
+        $this->servImgRepo = $this->em->getRepository(ServicesImages::class);
         $this->formService = $formService;
         $this->request = new Request();
     }
@@ -39,6 +42,22 @@ class ApiController extends AbstractController
                 'content' => htmlspecialchars_decode($service->getContent()), 
             ];
         }, $services);
+
+        return $this->json($list);
+    }
+
+    #[Route('/api/services-images', name: 'api_serv_img')]
+    public function servicesImg(): JsonResponse
+    {
+        $images = $this->servImgRepo->findAll();
+
+        $list = array_map(function ($image) {
+            return [
+                'id' => $image->getId(),
+                'service' => $image->getServId()->getId(),
+                'name' => $image->getImgName(),
+            ];
+        }, $images);
 
         return $this->json($list);
     }
