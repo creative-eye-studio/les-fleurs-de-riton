@@ -25,47 +25,47 @@ import Contact from './vue/controllers/Contact';
 var htmlContent = document.querySelector('html');
 const pageDatas = document.querySelector('body');
 const values = {
-    damping: pageDatas.dataset.damping,
-    scrollImgSpeed: pageDatas.dataset.scrollimg
+  damping: pageDatas.dataset.damping,
+  scrollImgSpeed: pageDatas.dataset.scrollimg
 };
 
 
 // Instantieur
 // -----------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-    const app = createApp({
-      components: { Services, Contact },
-      mounted() {
-        const md = new MobileDetect(window.navigator.userAgent);
-        initAnchor();
-        if (!md.mobile()) {
-          scrollWeb();
-          parallax();
-        } else {
-          AOS.init({ disable: 'mobile' })
-        }
+  const app = createApp({
+    components: { Services, Contact },
+    mounted() {
+      const md = new MobileDetect(window.navigator.userAgent);
+      initAnchor();
+      if (!md.mobile()) {
+        parallax();
+        scrollWeb();
+      } else {
+        AOS.init({ disable: 'mobile' })
       }
-    });
-    
-    app.mount('#website');
+    }
+  });
+
+  app.mount('#website');
 });
 
 
 // Smooth Scrollbar
 // -----------------------------------------------
 function scrollWeb() {
-    const scrollWeb = new ScrollWeb(values.damping);
-    scrollWeb.init;
-    return scrollWeb;
+  const scrollWeb = new ScrollWeb(values.damping);
+  scrollWeb.init;
+  return scrollWeb;
 }
 
 
 // Parallax
 // -----------------------------------------------
 function parallax() {
-    const parallax = new Parallax(values.damping, values.scrollImgSpeed);
-    parallax.initParallax();
-    return parallax;
+  const parallax = new Parallax(values.damping, values.scrollImgSpeed);
+  parallax.initParallax();
+  return parallax;
 }
 
 
@@ -75,33 +75,33 @@ var htmlContent = document.querySelector('html');
 
 var navBtn = document.querySelectorAll('.toggle-nav');
 navBtn.forEach(btn => {
-    btn.addEventListener('click', function() {
-      htmlContent.classList.toggle('nav-open');
+  btn.addEventListener('click', function () {
+    htmlContent.classList.toggle('nav-open');
   });
 });
 
 var navLink = document.querySelectorAll('.nav-link');
 navLink.forEach(link => {
-    link.addEventListener('click', function() {
-        htmlContent.classList.remove('nav-open');
-    });
+  link.addEventListener('click', function () {
+    htmlContent.classList.remove('nav-open');
+  });
 });
 
 
 // Smooth Scroll
 // -----------------------------------------------
-function initAnchor(){
+function initAnchor() {
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
-  anchorLinks.forEach(function(link) {
+  anchorLinks.forEach(function (link) {
     link.classList.add('nav-link');
   })
 }
 
 document.addEventListener('DOMContentLoaded', function () {
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
-  anchorLinks.forEach(function(link) {
-    
-    link.addEventListener('click', function(e) {
+  anchorLinks.forEach(function (link) {
+
+    link.addEventListener('click', function (e) {
       // Empêcher le comportement par défaut du lien
       e.preventDefault();
 
@@ -132,22 +132,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // ViewerJS
 // -----------------------------------------------
-document.addEventListener('DOMContentLoaded', function () {
-  const viewer = new Viewer(document.getElementById('image-viewer'), {
-    inline: false,
-    fullscreen: true,
-    viewed() {
-      viewer.zoomTo(1);
-    },
-  });
-  const gallery = new Viewer(document.getElementById('services-list'));
-})
+
 
 
 // Loader Site
 // -----------------------------------------------
 document.addEventListener('DOMContentLoaded', function () {
-  function closeLoader(){
+  function closeLoader() {
     document.querySelector('.loader').classList.add('open');
   }
 
@@ -159,15 +150,15 @@ document.addEventListener('DOMContentLoaded', function () {
 // -----------------------------------------------
 function formAJAX(formId, formResultId) {
   var form = document.querySelector(formId);
-  
-  form.addEventListener('submit', function(e) {  
+
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
     var formData = new FormData(form);
     var xhr = new XMLHttpRequest();
-    
+
     xhr.open(form.getAttribute('method'), form.getAttribute('action'), true);
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
         var resultElement = document.querySelector(formResultId);
         resultElement.innerHTML = xhr.responseText;

@@ -47,9 +47,11 @@
         "axios": "^1.4.0",
         "babel-loader": "^9.1.3",
         "dropzone": "^6.0.0-beta.2",
+        "fslightbox-vue": "^2.1.3",
         "grapesjs": "^0.21.4",
         "grapesjs-blocks-basic": "^1.0.2",
         "gsap": "^3.12.2",
+        "lightbox2": "^2.11.4",
         "lightgallery": "^2.7.2",
         "loader-utils": "^3.2.1",
         "mobile-detect": "^1.4.5",
@@ -60,6 +62,8 @@
         "tabs": "^0.2.0",
         "tailwindcss": "^3.3.3",
         "viewerjs": "^1.11.6",
+        "vue-easy-lightbox": "^1.16.0",
+        "vue-gallery-slideshow": "^1.5.2",
         "vuetify": "^3.3.13",
         "webpack": "^5.88.2"
     }

@@ -46,8 +46,24 @@ export class ScrollWeb {
             const htmlElement = document.querySelector('html');
             htmlElement.classList.toggle('onScroll', scrollY > 50);
         });
-        
-        
+
+        const fixedLightbox = document.querySelector('.content-lightbox');
+        const scrollContent = document.querySelector('.scroll-content');
+        const triggerScroll = 100; // Ajustez selon votre besoin
+
+        scrollContent.addEventListener('scroll', () => {
+            const scrollY = scrollContent.scrollTop;
+
+            // Ajoutez une condition pour déterminer quand rendre le lightbox fixe
+            if (scrollY > triggerScroll) {
+                fixedLightbox.style.position = 'fixed';
+                fixedLightbox.style.top = '0';
+            } else {
+                fixedLightbox.style.position = 'relative';
+            }
+        });
+
+
         // Scroll au click d'une ancre
         const navLinks = document.querySelectorAll('a[href^="#"]');
         navLinks.forEach(btn => {

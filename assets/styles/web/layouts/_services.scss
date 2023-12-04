@@ -1,37 +1,40 @@
-.webp{
-    .services{
+.webp {
+    .services {
         background-image: url('../../../../public/uploads/images/pages/bg-services.webp');
     }
 }
 
-.no-webp{
-    .services{
+.no-webp {
+    .services {
         background-image: url('../../../../public/uploads/images/pages/bg-services.png');
     }
 }
 
-.services{
+.services {
     background-color: $color-s-l;
     background-position: right bottom;
     background-size: 25%;
     background-repeat: no-repeat;
     overflow: hidden;
-    // padding: $marge-m;
-    .btn-list{
+
+    .btn-list {
         margin-bottom: $marge-m;
-        ul{
+
+        ul {
             list-style-type: none;
             padding: 0;
             margin: 0;
             text-align: center;
         }
-        li{
+
+        li {
             margin: 0 0 1rem;
             font-style: italic;
             font-weight: 500;
             cursor: pointer;
-            &.active{
-                &::before{
+
+            &.active {
+                &::before {
                     content: '';
                     position: absolute;
                     right: 0;
@@ -44,9 +47,11 @@
             }
         }
     }
-    .services-list{
+
+    .services-list {
         position: relative;
-        .service-block{
+
+        .service-block {
             opacity: 0;
             visibility: hidden;
             transform: translateX(10rem);
@@ -57,13 +62,20 @@
             transition: opacity 1s, visibility 1s, transform 1s;
             width: 100%;
             margin-left: 1rem;
-            a{
+
+            a {
                 color: black;
             }
-            figure{
+
+            figure {
                 position: relative;
-                padding-top: 100%;
-                img{
+                aspect-ratio: 1/1;
+            }
+
+            .service-images {
+                gap: $marge-m;
+
+                img {
                     position: absolute;
                     top: 0;
                     left: 0;
@@ -73,10 +85,8 @@
                     object-position: center;
                 }
             }
-            .service-images{
-                gap: $marge-m;
-            }
-            &.active{
+
+            &.active {
                 opacity: 1;
                 visibility: visible;
                 transform: translateX(0);
@@ -86,13 +96,16 @@
             }
         }
     }
+
     @media screen and (min-width: $sm) {
-        .btn-list{
-            ul{
+        .btn-list {
+            ul {
                 text-align: left;
-                li{
+
+                li {
                     position: relative;
-                    &::before{
+
+                    &::before {
                         content: '';
                         position: absolute;
                         right: 0;
@@ -102,8 +115,9 @@
                         background-color: black;
                         transition-duration: 1s;
                     }
-                    &:hover{
-                        &::before{
+
+                    &:hover {
+                        &::before {
                             left: 0;
                             width: 100%;
                         }
@@ -112,12 +126,14 @@
             }
         }
     }
+
     @media screen and (min-width: $lg) {
-        .services-list{
-            .service-block{
-                img{
+        .services-list {
+            .service-block {
+                img {
                     transition-duration: .5s;
-                    &:hover{
+
+                    &:hover {
                         transform: scale(1.2);
                         box-shadow: 0 0 .75rem rgba($color: #000000, $alpha: .75);
                     }
