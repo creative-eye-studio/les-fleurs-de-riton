@@ -1,37 +1,32 @@
 <template>
-  <div class="row" data-aos="fade-up">
-    <div class="tabs btn-list col-3 col-sm-12">
-      <ul>
-        <li v-for="data in datas" :key="data.pos" class="tab service-btn position-relative"
-          :class="{ active: data.isActive }" :data-tab="'tab' + data.id">
-          <span @click="selectTab(data)">{{ data.label }}</span>
-        </li>
-      </ul>
-    </div>
+  <div class="tabs btn-list col-3 col-sm-12">
+    <ul>
+      <li v-for="data in datas" :key="data.pos" class="tab service-btn position-relative"
+        :class="{ active: data.isActive }" :data-tab="'tab' + data.id">
+        <span @click="selectTab(data)">{{ data.label }}</span>
+      </li>
+    </ul>
+  </div>
 
-    <div class="tab-content services-list col-9 col-sm-12" id="services-list">
-      <section v-for="data in datas" :key="data.id"
-        :class="{ 'tab-pane': true, 'service-block': true, 'active': data.isActive }" :id="'tab' + data.id">
-        <h2 class="margin-top-none">{{ data.title }}</h2>
-        <div class="content-text" v-html="data.content"></div>
-        <div class="service-images row-no-marge">
-          <div v-for="image in images" :key="image.id" class="col-2 col-sm-3 col-xs-5 no-marge">
-            <figure class="thumb" v-if="image.service === data.id" @click="openLightbox(image)">
-              <img :alt="image.name" :src="getImagePath(image.name)" />
-            </figure>
-          </div>
+  <div class="tab-content services-list col-9 col-sm-12" id="services-list">
+    <section v-for="data in datas" :key="data.id"
+      :class="{ 'tab-pane': true, 'service-block': true, 'active': data.isActive }" :id="'tab' + data.id">
+      <h2 class="margin-top-none">{{ data.title }}</h2>
+      <div class="content-text" v-html="data.content"></div>
+      <div class="service-images row-no-marge">
+        <div v-for="image in images" :key="image.id" class="col-2 col-sm-3 col-xs-5 no-marge">
+          <figure class="thumb" v-if="image.service === data.id" @click="openLightbox(image)">
+            <img :alt="image.name" :src="getImagePath(image.name)" />
+          </figure>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </div>
+
   <div class="content-lightbox">
-    <vue-easy-lightbox 
-        :visible="lightboxVisible" 
-        :imgs="lightboxImages" 
-        :index="lightboxIndex"
-        @hide="closeLightbox"></vue-easy-lightbox>  
+    <vue-easy-lightbox :visible="lightboxVisible" :imgs="lightboxImages" :index="lightboxIndex"
+      @hide="closeLightbox"></vue-easy-lightbox>
   </div>
-  
 </template>
   
 <script>
@@ -50,7 +45,7 @@ export default {
       lightboxImages: [],
       lightboxIndex: 0,
       staticImagePath: '../uploads/images/services/',
-      lightboxTransform: 'none', 
+      lightboxTransform: 'none',
     };
   },
   mounted() {
