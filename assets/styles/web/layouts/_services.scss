@@ -74,7 +74,9 @@
 
             .service-images {
                 gap: $marge-m;
-
+                div:empty {
+                    display: none;
+                }
                 img {
                     position: absolute;
                     top: 0;
