@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     components: { Services, Contact },
     mounted() {
       const md = new MobileDetect(window.navigator.userAgent);
-      initAnchor();
       if (!md.mobile()) {
         parallax();
         scrollWeb();
@@ -73,15 +72,13 @@ function parallax() {
 // -----------------------------------------------
 var htmlContent = document.querySelector('html');
 
-var navBtn = document.querySelectorAll('.toggle-nav');
-navBtn.forEach(btn => {
+document.querySelectorAll('.toggle-nav').forEach(btn => {
   btn.addEventListener('click', function () {
     htmlContent.classList.toggle('nav-open');
   });
 });
 
-var navLink = document.querySelectorAll('.nav-link');
-navLink.forEach(link => {
+document.querySelectorAll('.nav-link').forEach(link => {
   link.addEventListener('click', function () {
     htmlContent.classList.remove('nav-open');
   });
@@ -90,26 +87,19 @@ navLink.forEach(link => {
 
 // Smooth Scroll
 // -----------------------------------------------
-function initAnchor() {
-  const anchorLinks = document.querySelectorAll('a[href^="#"]');
-  anchorLinks.forEach(function (link) {
-    link.classList.add('nav-link');
-  })
-}
-
 document.addEventListener('DOMContentLoaded', function () {
-  const anchorLinks = document.querySelectorAll('a[href^="#"]');
-  anchorLinks.forEach(function (link) {
-
+  anchorLink().forEach(function (link) {
     link.addEventListener('click', function (e) {
       // Empêcher le comportement par défaut du lien
       e.preventDefault();
 
       // Récupérer l'ID de l'ancre cible
-      const targetId = link.getAttribute('href').substring(1);
+      const targetId = this.getAttribute('href').substring(1);
 
       // Faire défiler jusqu'à l'ancre cible sans changer l'URL
       scrollSmoothly(targetId);
+
+      return false;
     });
   });
 
@@ -127,12 +117,12 @@ document.addEventListener('DOMContentLoaded', function () {
       window.scrollTo(scrollOptions);
     }
   }
+
+  function anchorLink() {
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    return anchorLinks;
+  }
 })
-
-
-// ViewerJS
-// -----------------------------------------------
-
 
 
 // Loader Site
@@ -142,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.loader').classList.add('open');
   }
 
-  setTimeout(closeLoader, 4000);
+  setTimeout(closeLoader, 3000);
 })
 
 

@@ -84,8 +84,11 @@ export default {
 
     openLightbox(image) {
       this.lightboxVisible = true;
-      this.lightboxImages = this.images.filter(img => img.service === image.service).map(img => ({ src: this.getImagePath(img.name) }));
+      this.lightboxImages = this.images
+          .filter(img => img.service === image.service)
+          .map(img => ({ src: this.getImagePath(img.name) }));
       this.lightboxIndex = this.lightboxImages.findIndex(img => img.src === this.getImagePath(image.name));
+      
       const lightboxContent = document.querySelector('.content-lightbox');
       document.querySelector('body').append(lightboxContent);
     },
